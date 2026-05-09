@@ -1,1172 +1,1267 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#2e7d32">
 <title>Spray Mix Pro</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
-body{
-font-family:-apple-system,BlinkMacSystemFont,“Segoe UI”,Roboto,sans-serif;
-background:#f0f2f0;color:#1a1a1a;min-height:100vh;
-padding-bottom:30px;-webkit-font-smoothing:antialiased;
+ 
+/* ── Reset & Base ─────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f0f2f0;
+  color: #1a1a1a;
+  padding-bottom: 40px;
 }
-body.dark{background:#0f110f;color:#eef2ee;}
-
-/* Header */
-.app-header{
-position:sticky;top:0;z-index:100;background:#2e7d32;color:#fff;
-padding:14px 16px 12px;display:flex;align-items:center;
-justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,0.3);
+body.dark { background: #0f110f; color: #eef2ee; }
+ 
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: #2e7d32; color: #fff;
+  padding: 14px 16px;
+  display: flex; justify-content: space-between; align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,.3);
 }
-.app-header h1{font-size:20px;font-weight:700;letter-spacing:-0.3px;}
-.app-header .sub{font-size:11px;opacity:0.78;margin-top:2px;}
-.dark-btn{
-background:rgba(255,255,255,0.2);border:none;border-radius:50%;
-color:#fff;font-size:18px;width:40px;height:40px;cursor:pointer;flex-shrink:0;
-display:flex;align-items:center;justify-content:center;
+.header h1 { font-size: 20px; font-weight: 700; }
+.header small { font-size: 11px; opacity: .78; display: block; margin-top: 2px; }
+.dark-mode-btn {
+  background: rgba(255,255,255,.2); border: none; border-radius: 50%;
+  color: #fff; font-size: 18px; width: 40px; height: 40px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
 }
-.dark-btn:active{background:rgba(255,255,255,0.35);}
-
-.page{max-width:500px;margin:0 auto;padding:12px 12px 20px;}
-
-/* Section titles */
-.stitle{
-font-size:11px;font-weight:700;text-transform:uppercase;
-letter-spacing:0.7px;color:#888;margin:18px 0 8px 2px;
+ 
+/* ── Page Layout ─────────────────────────────────────────────────────────── */
+.page { max-width: 500px; margin: 0 auto; padding: 12px; }
+.section-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .7px; color: #888; margin: 18px 0 8px 2px;
 }
-body.dark .stitle{color:#667066;}
-
-/* Cards */
-.card{
-background:#fff;border-radius:14px;
-box-shadow:0 1px 4px rgba(0,0,0,0.10),0 0 0 1px rgba(0,0,0,0.04);
-padding:14px;margin-bottom:10px;
+.dark .section-label { color: #667066; }
+ 
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+.card {
+  background: #fff; border-radius: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.1);
+  padding: 14px; margin-bottom: 10px;
 }
-body.dark .card{background:#1a1e1a;box-shadow:0 1px 4px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.04);}
-
-.row{display:flex;gap:10px;}
-.row .field{flex:1;}
-
-/* Fields */
-.field>label{
-display:block;font-size:11px;font-weight:600;text-transform:uppercase;
-letter-spacing:0.4px;color:#888;margin-bottom:5px;
+.dark .card { background: #1a1e1a; }
+ 
+/* ── Form Inputs ─────────────────────────────────────────────────────────── */
+.input-row { display: flex; gap: 10px; }
+.field { flex: 1; }
+.field label {
+  display: block; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .4px;
+  color: #888; margin-bottom: 5px;
 }
-body.dark .field>label{color:#667066;}
-
-.field input,.field select,input.sa,select.sa{
-width:100%;padding:11px 12px;font-size:15px;
-background:#f5f7f5;color:#1a1a1a;
-border:1.5px solid #dde3dd;border-radius:8px;
-outline:none;-webkit-appearance:none;appearance:none;
-font-family:inherit;transition:border-color 0.15s;
+.dark .field label { color: #667066; }
+ 
+input, select {
+  width: 100%; padding: 13px 14px; font-size: 16px; min-height: 48px;
+  background: #f5f7f5; color: #1a1a1a;
+  border: 1.5px solid #dde3dd; border-radius: 8px;
+  outline: none; appearance: none;
+  font-family: inherit; transition: border-color .15s;
 }
-body.dark .field input,body.dark .field select,
-body.dark input.sa,body.dark select.sa{
-background:#222722;color:#eef2ee;border-color:#2e352e;
+.dark input, .dark select {
+  background: #222722; color: #eef2ee; border-color: #2e352e;
 }
-.field input:focus,.field select:focus,
-input.sa:focus,select.sa:focus{border-color:#2e7d32;}
-body.dark .field input:focus,body.dark .field select:focus,
-body.dark input.sa:focus,body.dark select.sa:focus{border-color:#4caf50;}
-
-select.sa,.field select{
-background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘10’ height=‘6’%3E%3Cpath fill=’%23888’ d=‘M5 6L0 0h10z’/%3E%3C/svg%3E”);
-background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;
+input:focus, select:focus { border-color: #2e7d32; }
+.dark input:focus, .dark select:focus { border-color: #4caf50; }
+ 
+/* Dropdown arrow */
+select {
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23888' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
 }
-
-/* Buttons */
-.btn{
-display:block;width:100%;padding:13px 16px;
-font-size:15px;font-weight:600;color:#fff;
-background:#2e7d32;border:none;border-radius:8px;
-cursor:pointer;text-align:center;margin-top:8px;
-transition:opacity 0.15s,transform 0.1s;font-family:inherit;
+ 
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn {
+  display: block; width: 100%;
+  padding: 15px; font-size: 16px; min-height: 50px;
+  font-weight: 600; color: #fff;
+  background: #2e7d32; border: none; border-radius: 8px;
+  cursor: pointer; margin-top: 8px;
+  font-family: inherit; transition: opacity .15s, transform .1s;
 }
-body.dark .btn{background:#4caf50;color:#0f110f;}
-.btn:active{opacity:0.82;transform:scale(0.98);}
-.btn-blue{background:#1565c0 !important;}
-body.dark .btn-blue{background:#5c9eff !important;color:#0f110f !important;}
-.btn-red{background:#c62828 !important;}
-body.dark .btn-red{background:#ef5350 !important;color:#fff !important;}
-.btn-gray{background:#555 !important;}
-body.dark .btn-gray{background:#444 !important;color:#fff !important;}
-.btn-outline{background:transparent !important;border:1.5px solid #2e7d32 !important;color:#2e7d32 !important;}
-body.dark .btn-outline{border-color:#4caf50 !important;color:#4caf50 !important;}
-.btn-sm{font-size:13px;padding:10px 14px;}
-.btn-row{display:flex;gap:8px;margin-top:8px;}
-.btn-row .btn{margin-top:0;}
-
-/* Mode toggle */
-.mode-toggle{
-display:flex;background:#e8eae8;border-radius:10px;
-padding:3px;gap:3px;margin-bottom:12px;
+.btn:active { opacity: .82; transform: scale(.98); }
+.dark .btn { background: #4caf50; color: #0f110f; }
+ 
+.btn.blue  { background: #1565c0; }
+.btn.red   { background: #c62828; }
+.btn.gray  { background: #555; }
+.btn.small { font-size: 14px; padding: 12px 16px; min-height: 46px; }
+ 
+.btn.outline {
+  background: transparent;
+  border: 1.5px solid #2e7d32;
+  color: #2e7d32;
 }
-body.dark .mode-toggle{background:#222722;}
-.mode-btn{
-flex:1;padding:9px 8px;font-size:13px;font-weight:600;
-border:none;border-radius:8px;cursor:pointer;
-background:transparent;color:#888;transition:all 0.2s;font-family:inherit;
+.dark .btn.outline { border-color: #4caf50; color: #4caf50; }
+ 
+.btn.new-mix {
+  background: transparent;
+  border: 1.5px solid #c62828;
+  color: #c62828;
+  margin-top: 0;
 }
-body.dark .mode-btn{color:#667066;}
-.mode-btn.active{background:#fff;color:#2e7d32;box-shadow:0 1px 4px rgba(0,0,0,0.12);}
-body.dark .mode-btn.active{background:#1a1e1a;color:#4caf50;}
-
-/* Crop tabs */
-.crop-tabs{
-display:flex;gap:6px;margin-bottom:12px;
-overflow-x:auto;-webkit-overflow-scrolling:touch;
-scrollbar-width:none;padding-bottom:2px;
+.dark .btn.new-mix { border-color: #ef5350; color: #ef5350; }
+ 
+.btn-row { display: flex; gap: 8px; margin-top: 8px; }
+.btn-row .btn { margin-top: 0; }
+ 
+/* ── Mode Toggle (Per Tank / Per Acre / Season) ──────────────────────────── */
+.mode-toggle {
+  display: flex; background: #e8eae8; border-radius: 10px;
+  padding: 3px; gap: 3px; margin-bottom: 12px;
 }
-.crop-tabs::-webkit-scrollbar{display:none;}
-.crop-tab{
-flex-shrink:0;padding:8px 16px;
-background:#fff;color:#555;
-border:1.5px solid #dde3dd;border-radius:20px;
-font-size:13px;font-weight:600;cursor:pointer;
-white-space:nowrap;transition:all 0.15s;font-family:inherit;
+.dark .mode-toggle { background: #222722; }
+.mode-toggle-btn {
+  flex: 1; padding: 11px; font-size: 14px; min-height: 46px;
+  font-weight: 600; border: none; border-radius: 8px;
+  cursor: pointer; background: transparent; color: #888;
+  font-family: inherit;
 }
-body.dark .crop-tab{background:#1a1e1a;color:#aab4aa;border-color:#2e352e;}
-.crop-tab.active{background:#2e7d32;border-color:#2e7d32;color:#fff;}
-body.dark .crop-tab.active{background:#4caf50;border-color:#4caf50;color:#0f110f;}
-
-/* Chem cards */
-.chem-card{position:relative;}
-.remove-btn{
-position:absolute;top:10px;right:10px;
-width:28px;height:28px;border-radius:50%;
-background:#c62828;border:none;color:#fff;
-font-size:16px;line-height:1;cursor:pointer;
-display:flex;align-items:center;justify-content:center;
+.mode-toggle-btn.active {
+  background: #fff; color: #2e7d32;
+  box-shadow: 0 1px 4px rgba(0,0,0,.12);
 }
-body.dark .remove-btn{background:#ef5350;}
-
-.preset-box{background:#e8f0fe;border-radius:8px;padding:10px;margin-bottom:8px;}
-body.dark .preset-box{background:#0d1f3c;}
-.preset-box .blabel{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:#1565c0;margin-bottom:6px;}
-body.dark .preset-box .blabel{color:#5c9eff;}
-
-.custom-box{background:#fff8e1;border-radius:8px;padding:10px;}
-body.dark .custom-box{background:#251800;}
-.custom-box .blabel{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:#e65100;margin-bottom:6px;}
-
-.or-div{text-align:center;font-size:11px;font-weight:700;color:#aaa;letter-spacing:1px;margin:6px 0;}
-body.dark .or-div{color:#555;}
-.note-txt{font-size:11px;color:#888;font-style:italic;line-height:1.4;margin:5px 0 2px;}
-body.dark .note-txt{color:#667066;}
-.hint-txt{font-size:12px;font-weight:600;color:#2e7d32;margin:4px 0 0;min-height:16px;}
-body.dark .hint-txt{color:#4caf50;}
-
-/* Results */
-.results-card{
-background:#e8f5e9;border-radius:14px;
-padding:16px;margin-top:10px;border:1.5px solid #2e7d32;
+.dark .mode-toggle-btn.active { background: #1a1e1a; color: #4caf50; }
+ 
+/* ── Crop Tabs ───────────────────────────────────────────────────────────── */
+.crop-tabs {
+  display: flex; gap: 6px; margin-bottom: 12px;
+  overflow-x: auto; scrollbar-width: none; padding-bottom: 2px;
 }
-body.dark .results-card{background:#0d2010;border-color:#4caf50;}
-.results-title{font-size:17px;font-weight:700;color:#2e7d32;margin-bottom:10px;}
-body.dark .results-title{color:#4caf50;}
-
-.season-card{
-background:#e8f5e9;border-radius:14px;
-padding:16px;margin-top:10px;border:1.5px solid #2e7d32;
+.crop-tabs::-webkit-scrollbar { display: none; }
+.crop-tab {
+  flex-shrink: 0; padding: 10px 18px; min-height: 44px;
+  background: #fff; color: #555;
+  border: 1.5px solid #dde3dd; border-radius: 20px;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; white-space: nowrap; font-family: inherit;
 }
-body.dark .season-card{background:#0d2010;border-color:#4caf50;}
-.season-title{font-size:17px;font-weight:700;color:#2e7d32;margin-bottom:4px;}
-body.dark .season-title{color:#4caf50;}
-.season-sub{font-size:12px;color:#888;margin-bottom:12px;}
-body.dark .season-sub{color:#667066;}
-
-.result-row{
-display:flex;justify-content:space-between;align-items:center;
-padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.08);font-size:14px;
+.dark .crop-tab { background: #1a1e1a; color: #aab4aa; border-color: #2e352e; }
+.crop-tab.active { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+.dark .crop-tab.active { background: #4caf50; border-color: #4caf50; color: #0f110f; }
+ 
+/* ── Chemical Cards ──────────────────────────────────────────────────────── */
+.chem-card { position: relative; }
+ 
+/* Remove button */
+.remove-btn {
+  position: absolute; top: 10px; right: 10px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #c62828; border: none;
+  color: #fff; font-size: 20px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
 }
-body.dark .result-row{border-color:rgba(255,255,255,0.08);}
-.result-row:last-child{border-bottom:none;}
-.result-name{color:#555;flex:1;padding-right:8px;}
-body.dark .result-name{color:#aab4aa;}
-.result-val{font-size:17px;font-weight:700;}
-
-.result-row-wide{
-display:flex;justify-content:space-between;align-items:center;
-padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.08);font-size:14px;
+ 
+/* Pick from list section (blue) */
+.pick-section { background: #e8f0fe; border-radius: 8px; padding: 10px; margin-bottom: 8px; }
+.dark .pick-section { background: #0d1f3c; }
+.pick-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .4px; color: #1565c0; margin-bottom: 6px;
 }
-body.dark .result-row-wide{border-color:rgba(255,255,255,0.08);}
-.result-row-wide:last-child{border-bottom:none;}
-.result-name-wide{color:#555;flex:1;padding-right:8px;font-size:13px;}
-body.dark .result-name-wide{color:#aab4aa;}
-.result-vals{text-align:right;}
-.result-val-main{font-size:17px;font-weight:700;display:block;}
-.result-val-sub{font-size:11px;color:#888;display:block;}
-body.dark .result-val-sub{color:#667066;}
-
-/* Divider & saved */
-.divider{border:none;border-top:1px solid #dde3dd;margin:20px 0;}
-body.dark .divider{border-color:#2e352e;}
-.save-row{display:flex;gap:8px;align-items:stretch;}
-.save-row input{flex:1;}
-.save-row .btn{margin-top:0;width:auto;flex-shrink:0;}
+ 
+/* Custom chemical section (amber) */
+.custom-section { background: #fff8e1; border-radius: 8px; padding: 10px; }
+.dark .custom-section { background: #251800; }
+.custom-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .4px; color: #e65100; margin-bottom: 6px;
+}
+ 
+.or-divider {
+  text-align: center; font-size: 11px; font-weight: 700;
+  color: #aaa; letter-spacing: 1px; margin: 6px 0;
+}
+.chem-note { font-size: 11px; color: #888; font-style: italic; line-height: 1.4; margin: 5px 0 2px; }
+.rate-hint { font-size: 12px; font-weight: 600; color: #2e7d32; margin: 4px 0; min-height: 16px; }
+.dark .rate-hint { color: #4caf50; }
+ 
+/* Search box inside chemical card */
+.search-wrap { position: relative; margin-bottom: 8px; }
+.search-wrap input { padding-left: 36px; background: #f5f7f5; }
+.dark .search-wrap input { background: #222722; }
+.search-icon {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  font-size: 16px; pointer-events: none; opacity: .5;
+}
+ 
+/* Collapsed state — shows one-line summary instead of full card */
+.chem-card.collapsed .pick-section,
+.chem-card.collapsed .or-divider,
+.chem-card.collapsed .custom-section,
+.chem-card.collapsed .rate-inputs { display: none; }
+ 
+.chem-summary {
+  display: none; font-size: 14px; font-weight: 600;
+  color: #2e7d32; padding: 4px 0 2px;
+  cursor: pointer; justify-content: space-between; align-items: center;
+}
+.dark .chem-summary { color: #4caf50; }
+.chem-card.collapsed .chem-summary { display: flex; }
+.chem-summary .expand-hint { font-size: 11px; font-weight: 400; color: #888; }
+ 
+/* ── Results ─────────────────────────────────────────────────────────────── */
+.results-card {
+  background: #e8f5e9; border-radius: 14px;
+  padding: 16px; margin-top: 10px;
+  border: 1.5px solid #2e7d32;
+}
+.dark .results-card { background: #0d2010; border-color: #4caf50; }
+.results-title { font-size: 17px; font-weight: 700; color: #2e7d32; margin-bottom: 10px; }
+.dark .results-title { color: #4caf50; }
+ 
+/* Individual result row */
+.result-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,.08); font-size: 14px;
+}
+.dark .result-row { border-color: rgba(255,255,255,.08); }
+.result-row:last-child { border-bottom: none; }
+.result-name { color: #555; flex: 1; padding-right: 8px; font-size: 14px; }
+.dark .result-name { color: #aab4aa; }
+.result-value { font-size: 22px; font-weight: 700; text-align: right; }
+.result-sub { font-size: 11px; color: #888; display: block; font-weight: 400; }
+.dark .result-sub { color: #667066; }
+ 
+/* Color coding by category */
+.result-row.dry   { background: rgba(101,67,33,.06); border-radius: 6px; padding: 8px 6px; }
+.result-row.water { background: rgba(21,101,192,.06); border-radius: 6px; padding: 8px 6px; }
+.result-row.herb  { background: rgba(46,125,50,.06);  border-radius: 6px; padding: 8px 6px; }
+.dark .result-row.dry   { background: rgba(188,143,82,.08); }
+.dark .result-row.water { background: rgba(92,158,255,.08); }
+.dark .result-row.herb  { background: rgba(76,175,80,.08); }
+.result-row.dry   .result-name::before { content: '🟤 '; }
+.result-row.water .result-name::before { content: '🔵 '; }
+.result-row.herb  .result-name::before { content: '🟢 '; }
+ 
+/* Water to fill row */
+.water-to-fill {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; margin-top: 6px;
+  border-top: 2px solid #2e7d32; font-size: 14px;
+}
+.dark .water-to-fill { border-color: #4caf50; }
+.water-to-fill .result-name { color: #2e7d32; font-weight: 700; }
+.dark .water-to-fill .result-name { color: #4caf50; }
+.water-to-fill .result-value { font-size: 22px; font-weight: 700; color: #2e7d32; }
+.dark .water-to-fill .result-value { color: #4caf50; }
+ 
+/* ── Warnings ─────────────────────────────────────────────────────────────── */
+.warning-box {
+  background: #fff3e0; border-radius: 12px;
+  padding: 14px; margin-top: 10px;
+  border: 1.5px solid #e65100;
+}
+.dark .warning-box { background: #2a1500; border-color: #ff6d00; }
+.warning-title { font-size: 15px; font-weight: 700; color: #e65100; margin-bottom: 8px; }
+.dark .warning-title { color: #ff9800; }
+.warning-row {
+  font-size: 13px; color: #5d3000;
+  padding: 6px 0; border-bottom: 1px solid rgba(230,81,0,.15); line-height: 1.5;
+}
+.dark .warning-row { color: #ffcc80; border-color: rgba(255,152,0,.2); }
+.warning-row:last-child { border-bottom: none; }
+.warning-label { font-weight: 700; color: #e65100; display: block; margin-bottom: 2px; }
+.dark .warning-label { color: #ff9800; }
+ 
+/* ── Saved Mixes ─────────────────────────────────────────────────────────── */
+hr { border: none; border-top: 1px solid #dde3dd; margin: 20px 0; }
+.dark hr { border-color: #2e352e; }
+.save-row { display: flex; gap: 8px; }
+.save-row input { flex: 1; }
+.save-row .btn { margin-top: 0; width: auto; flex-shrink: 0; }
+ 
 </style>
-
 </head>
 <body>
-
-<header class="app-header">
-  <div>
-    <h1>&#127805; Spray Mix Pro</h1>
-    <div class="sub">Corn &middot; Soybeans &middot; Cotton &middot; Custom</div>
-  </div>
-  <button class="dark-btn" onclick="toggleDark()" title="Dark mode">&#127769;</button>
+ 
+<header class="header">
+  <div>
+    <h1>🌾 Spray Mix Pro</h1>
+    <small>Corn · Soybeans · Cotton · Custom</small>
+  </div>
+  <button class="dark-mode-btn" onclick="document.body.classList.toggle('dark')">🌙</button>
 </header>
-
+ 
 <div class="page">
-
-  <div class="stitle">Calculation Mode</div>
-  <div class="mode-toggle">
-    <button class="mode-btn active" id="modeTank" onclick="setMode('tank')">Per Tank</button>
-    <button class="mode-btn" id="modeAcres" onclick="setMode('acres')">Total Season</button>
-  </div>
-
-  <div id="tankSection" class="card">
-    <div class="row">
-      <div class="field">
-        <label>Tank Size (gal)</label>
-        <input id="tank" type="number" inputmode="decimal" placeholder="300">
-      </div>
-      <div class="field">
-        <label>GPA (gal/acre)</label>
-        <input id="gpa" type="number" inputmode="decimal" placeholder="15">
-      </div>
-    </div>
-  </div>
-
-  <div id="acresSection" class="card" style="display:none">
-    <div class="row">
-      <div class="field">
-        <label>Total Acres</label>
-        <input id="totalAcres" type="number" inputmode="decimal" placeholder="e.g. 500">
-      </div>
-      <div class="field">
-        <label>Applications / Year</label>
-        <input id="numApps" type="number" inputmode="decimal" placeholder="1" value="1">
-      </div>
-    </div>
-  </div>
-
-  <div class="stitle">Chemicals</div>
-
-  <div class="crop-tabs" id="cropTabs">
-    <button class="crop-tab active" onclick="setCrop('all',this)">All</button>
-    <button class="crop-tab" onclick="setCrop('corn',this)">&#127807; Corn</button>
-    <button class="crop-tab" onclick="setCrop('soy',this)">&#129752; Soybeans</button>
-    <button class="crop-tab" onclick="setCrop('cotton',this)">&#127807; Cotton</button>
-    <button class="crop-tab" onclick="setCrop('general',this)">&#9881; General</button>
-  </div>
-
-  <div id="chemList"></div>
-  <button class="btn btn-outline" onclick="addChem()">+ Add Chemical</button>
-  <button class="btn btn-blue" id="calcBtn" onclick="calculate()">Calculate Per Tank</button>
-  <div id="results" style="display:none"></div>
-  <button class="btn" id="textBtn" onclick="textResults()" style="display:none;background:#25a244;">&#128241; Text Results</button>
-
-  <hr class="divider">
-  <div class="stitle">Saved Mixes</div>
-
-  <div class="card">
-    <div class="save-row">
-      <input class="sa" id="mixName" type="text" placeholder="Mix name...">
-      <button class="btn btn-gray btn-sm" onclick="saveMix()" style="padding:11px 16px;margin-top:0;">Save</button>
-    </div>
-    <div class="field" style="margin-top:10px">
-      <label>Load a saved mix</label>
-      <select class="sa" id="savedList"></select>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-sm" onclick="loadMix()">Load</button>
-      <button class="btn btn-sm btn-red" onclick="deleteMix()">Delete</button>
-    </div>
-  </div>
-
+ 
+  <!-- Calculation Mode -->
+  <div class="section-label">Calculation Mode</div>
+  <div class="mode-toggle">
+    <button class="mode-toggle-btn active" id="mTank"   onclick="setMode('tank')">Per Tank</button>
+    <button class="mode-toggle-btn"        id="mAcre"   onclick="setMode('acre')">Per Acre</button>
+    <button class="mode-toggle-btn"        id="mSeason" onclick="setMode('season')">Season Total</button>
+  </div>
+ 
+  <!-- Per Tank inputs -->
+  <div id="tankInputs" class="card">
+    <div class="input-row">
+      <div class="field">
+        <label>Tank Size (gal)</label>
+        <input id="tank" type="number" inputmode="decimal" placeholder="300" oninput="savePrefs()">
+      </div>
+      <div class="field">
+        <label>GPA (gal/acre)</label>
+        <input id="gpa" type="number" inputmode="decimal" placeholder="15" oninput="savePrefs()">
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Per Acre inputs -->
+  <div id="acreInputs" class="card" style="display:none">
+    <div class="input-row">
+      <div class="field">
+        <label>Acres to Spray</label>
+        <input id="sprayAcres" type="number" inputmode="decimal" placeholder="e.g. 50">
+      </div>
+      <div class="field">
+        <label>GPA (gal/acre)</label>
+        <input id="acreGpa" type="number" inputmode="decimal" placeholder="15">
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Season Total inputs -->
+  <div id="seasonInputs" class="card" style="display:none">
+    <div class="input-row">
+      <div class="field">
+        <label>Total Acres</label>
+        <input id="acres" type="number" inputmode="decimal" placeholder="500">
+      </div>
+      <div class="field">
+        <label>Applications/Year</label>
+        <input id="apps" type="number" inputmode="decimal" placeholder="1" value="1">
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Crop filter tabs -->
+  <div class="section-label">Chemicals</div>
+  <div class="crop-tabs">
+    <button class="crop-tab active" onclick="setCrop('all',this)">All</button>
+    <button class="crop-tab" onclick="setCrop('corn',this)">🌽 Corn</button>
+    <button class="crop-tab" onclick="setCrop('soy',this)">🫘 Soybeans</button>
+    <button class="crop-tab" onclick="setCrop('cotton',this)">🌿 Cotton</button>
+    <button class="crop-tab" onclick="setCrop('general',this)">⚙️ General</button>
+  </div>
+ 
+  <div id="chemList"></div>
+ 
+  <button class="btn outline" onclick="addChemCard()">+ Add Chemical</button>
+  <button class="btn blue" id="calcBtn" onclick="calculate()">Calculate Per Tank</button>
+  <div id="results" style="display:none"></div>
+  <button class="btn" id="txtBtn" onclick="textResults()" style="display:none;background:#25a244">📱 Text Results</button>
+  <button class="btn new-mix" onclick="startNewMix()">🗑 Start New Mix</button>
+ 
+  <hr>
+ 
+  <!-- Saved Mixes -->
+  <div class="section-label">Saved Mixes</div>
+  <div class="card">
+    <div class="save-row">
+      <input id="mixName" type="text" placeholder="Mix name...">
+      <button class="btn gray small" onclick="saveMix()">Save</button>
+    </div>
+    <div class="field" style="margin-top:10px">
+      <label>Load a saved mix</label>
+      <select id="savedList"></select>
+    </div>
+    <div class="btn-row">
+      <button class="btn small" onclick="loadMix()">Load</button>
+      <button class="btn small red" onclick="deleteMix()">Delete</button>
+    </div>
+  </div>
+ 
 </div>
-
+ 
 <script>
-
-var UNITS = ["oz","pt","qt","gal","lb"];
-var OZ = {oz:1, pt:16, qt:32, gal:128, lb:16};
-function cvt(v,f,t){ return v * OZ[f] / OZ[t]; }
-function $(id){ return document.getElementById(id); }
-function q(el,s){ return el.querySelector(s); }
-
-var activeCrop = "all";
-var calcMode = "tank";
-
-const CHEMS = [
-
-  // ═══════════════ GENERAL / BURNDOWN ═══════════════
-  {
-    name:"Glyphosate (Generic 41%)",
-    crops:["general","corn","soy","cotton"],
-    note:"Standard POST. Increase rate for larger weeds. Add AMS in hard water. Do NOT add COC.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Small weeds <4\" (20 oz)",rate:20,unit:"oz"},
-      {label:"Standard (32 oz)",rate:32,unit:"oz"},
-      {label:"Medium weeds 6–12\" (48 oz)",rate:48,unit:"oz"},
-      {label:"Large weeds >12\" (64 oz)",rate:64,unit:"oz"},
-    ]
-  },
-  {
-    name:"Glyphosate (Roundup Branded)",
-    crops:["general","corn","soy","cotton"],
-    note:"Higher a.e. concentration than generic — use 22 oz for standard weed control.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Standard (22 oz)",rate:22,unit:"oz"},
-      {label:"Medium weeds 6–12\" (33 oz)",rate:33,unit:"oz"},
-      {label:"Large weeds >12\" (44 oz)",rate:44,unit:"oz"},
-    ]
-  },
-  {
-    name:"Roundup PowerMax 3",
-    crops:["general","corn","soy","cotton"],
-    note:"4.8 lb ae/gal — highest-concentration branded glyphosate. Built-in surfactant — do NOT add COC/MSO. Use 10–15 GPA. Max 44 oz/application in-crop.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Small weeds <4\" (16 oz)",rate:16,unit:"oz"},
-      {label:"Standard — small weeds (22 oz)",rate:22,unit:"oz"},
-      {label:"Medium weeds 6–12\" (33 oz)",rate:33,unit:"oz"},
-      {label:"Large weeds / heavy pressure (36 oz)",rate:36,unit:"oz"},
-      {label:"Max in-crop single application (44 oz)",rate:44,unit:"oz"},
-    ]
-  },
-  {
-    name:"Glyphosate 53.8% (Generic)",
-    crops:["general","corn","soy","cotton"],
-    note:"~5.5 lb ai/gal — higher concentration than 41% generic. Fewer oz needed per acre vs standard 41%. Add AMS in hard water. Do NOT add COC/MSO.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Small weeds <4\" (16 oz)",rate:16,unit:"oz"},
-      {label:"Standard (22 oz)",rate:22,unit:"oz"},
-      {label:"Medium weeds 6–12\" (32 oz)",rate:32,unit:"oz"},
-      {label:"Large weeds / perennials (44 oz)",rate:44,unit:"oz"},
-    ]
-  },
-  {
-    name:"Liberty Ultra (Glufosinate-P)",
-    crops:["general","corn","soy","cotton"],
-    note:"Next-gen glufosinate (Glu-L technology) — 24 oz replaces 32 oz standard Liberty. Min 15–20 GPA. Add AMS 1.5–3 lb/A. Apply sunny, warm conditions. Max 34 oz/application.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Standard POST (24 oz)",rate:24,unit:"oz"},
-      {label:"Dense/tall weeds (29 oz)",rate:29,unit:"oz"},
-      {label:"Max labeled rate (34 oz)",rate:34,unit:"oz"},
-    ]
-  },
-  {
-    name:"AMS Hotshot (Liquid AMS + Adjuvant)",
-    crops:["general","corn","soy","cotton"],
-    note:"All-in-one liquid AMS + drift control + adjuvant. Use 32–48 oz/A (1–1.5 qt/A). Replaces dry AMS + surfactant. Compatible with glyphosate and glufosinate.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Light / soft water (32 oz = 1 qt)",rate:32,unit:"oz"},
-      {label:"Standard (40 oz)",rate:40,unit:"oz"},
-      {label:"Hard water / heavy pressure (48 oz = 1.5 qt)",rate:48,unit:"oz"},
-    ]
-  },
-  {
-    name:"Liberty / Glufosinate",
-    crops:["general","corn","soy","cotton"],
-    note:"Contact – needs 15–20 GPA. Always add AMS 1.5–3 lb/A. Apply in warm, sunny conditions. Do NOT add COC.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Burndown / low (29 oz)",rate:29,unit:"oz"},
-      {label:"Standard POST (32 oz)",rate:32,unit:"oz"},
-      {label:"Dense/tall weeds (36 oz)",rate:36,unit:"oz"},
-      {label:"Max labeled rate (43 oz)",rate:43,unit:"oz"},
-    ]
-  },
-  {
-    name:"Paraquat (Gramoxone) – RESTRICTED",
-    crops:["general","corn","soy","cotton"],
-    note:"RESTRICTED USE. Contact — spray coverage critical. Add NIS or COC. Certified applicator required.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Low (24 oz)",rate:24,unit:"oz"},
-      {label:"Standard (32 oz)",rate:32,unit:"oz"},
-      {label:"Heavy pressure (40 oz)",rate:40,unit:"oz"},
-    ]
-  },
-  {
-    name:"2,4-D Amine",
-    crops:["general","corn","cotton"],
-    note:"Observe pre-plant intervals (usually 7–30 days). Ester formulations faster in cool weather.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Low burndown (0.5 pt)",rate:0.5,unit:"pt"},
-      {label:"Standard (1 pt)",rate:1,unit:"pt"},
-      {label:"Max burndown (1 qt)",rate:1,unit:"qt"},
-    ]
-  },
-  {
-    name:"Dicamba (Banvel/Engenia)",
-    crops:["general","corn","cotton"],
-    note:"Check state/label restrictions carefully. Observe buffer zones. Max ~1 pt/A for most burndown uses.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Low (0.25 pt)",rate:0.25,unit:"pt"},
-      {label:"Standard (0.5 pt)",rate:0.5,unit:"pt"},
-      {label:"Max burndown (1 pt)",rate:1,unit:"pt"},
-    ]
-  },
-  {
-    name:"AMS – Ammonium Sulfate",
-    crops:["general","corn","soy","cotton"],
-    note:"Water conditioner for glyphosate & glufosinate. 8.5–17 lb per 100 gal spray solution. Add BEFORE herbicide.",
-    dUnit:"lb", dOut:"lb",
-    rates:[
-      {label:"Soft water (1 lb/A)",rate:1,unit:"lb"},
-      {label:"Standard (1.5 lb/A)",rate:1.5,unit:"lb"},
-      {label:"Hard water (2 lb/A)",rate:2,unit:"lb"},
-      {label:"Very hard water (3 lb/A)",rate:3,unit:"lb"},
-    ]
-  },
-  {
-    name:"White Water (Crop Oil Conc.)",
-    crops:["general","corn","soy","cotton"],
-    note:"Brand-name COC adjuvant. Use 1-2 pt/A or 1% v/v of spray volume. Do NOT use with Liberty/glufosinate. Improves herbicide absorption and coverage.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Light coverage (1 pt/A)",rate:1,unit:"pt"},
-      {label:"Standard (1.5 pt/A)",rate:1.5,unit:"pt"},
-      {label:"Heavy / dense canopy (2 pt/A)",rate:2,unit:"pt"},
-      {label:"1% v/v at 10 GPA (1 pt/A)",rate:1,unit:"pt"},
-      {label:"1% v/v at 15 GPA (1.5 pt/A)",rate:1.5,unit:"pt"},
-      {label:"1% v/v at 20 GPA (2 pt/A)",rate:2,unit:"pt"},
-    ]
-  },
-  {
-    name:"Crop Oil Concentrate (COC)",
-    crops:["general","corn","soy","cotton"],
-    note:"Adjuvant. Use 1–2 pt/A or 1% v/v of spray volume. Do NOT use with Liberty/glufosinate.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Light (1 pt/A)",rate:1,unit:"pt"},
-      {label:"Standard (1.5 pt/A)",rate:1.5,unit:"pt"},
-      {label:"Heavy coverage (2 pt/A)",rate:2,unit:"pt"},
-    ]
-  },
-  {
-    name:"NIS – Non-Ionic Surfactant",
-    crops:["general","corn","soy","cotton"],
-    note:"Use 0.25% v/v (1 qt/100 gal). Required with many POST herbicides. More gentle than COC.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Standard 0.25% v/v at 10 GPA (4 oz)",rate:4,unit:"oz"},
-      {label:"Standard 0.25% v/v at 15 GPA (6 oz)",rate:6,unit:"oz"},
-      {label:"Standard 0.25% v/v at 20 GPA (8 oz)",rate:8,unit:"oz"},
-    ]
-  },
-  {
-    name:"Clethodim (Select Max)",
-    crops:["general","corn","soy","cotton"],
-    note:"Grass herbicide. Do NOT tank-mix with 2,4-D or dicamba — antagonism. Add COC at 1% v/v.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Low (6 oz)",rate:6,unit:"oz"},
-      {label:"Standard (9 oz)",rate:9,unit:"oz"},
-      {label:"Max / tough grasses (16 oz)",rate:16,unit:"oz"},
-    ]
-  },
-  {
-    name:"Saflufenacil (Sharpen)",
-    crops:["general","corn","soy","cotton"],
-    note:"PRE/burndown. Add MSO at 1% v/v. ~7–10 days residual per 1 oz. Observe soybean pre-plant intervals at higher rates.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Burndown only (1 oz)",rate:1,unit:"oz"},
-      {label:"Standard residual (2 oz)",rate:2,unit:"oz"},
-    ]
-  },
-
-  // ═══════════════ CORN ═══════════════
-  {
-    name:"Atrazine 4L (Corn)",
-    crops:["corn"],
-    note:"CORN ONLY. Max 2 lb ai/A POST; 2.5 lb ai/A/year total. Do not apply if corn >12\" tall POST. Check state restrictions.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Low PRE/POST (0.5 pt = 0.5 lb ai)",rate:0.5,unit:"pt"},
-      {label:"Standard (1 pt = 1 lb ai)",rate:1,unit:"pt"},
-      {label:"Full PRE (2 pt = 2 lb ai)",rate:2,unit:"pt"},
-    ]
-  },
-  {
-    name:"Mesotrione / Callisto (Corn)",
-    crops:["corn"],
-    note:"Add COC 1% v/v + AMS or UAN. Max 7.7 oz/A/year in corn. Do not apply to white popcorn.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"POST standard (3 oz)",rate:3,unit:"oz"},
-      {label:"PRE standard (5.3 oz)",rate:5.3,unit:"oz"},
-      {label:"PRE max corn (7.7 oz)",rate:7.7,unit:"oz"},
-    ]
-  },
-  {
-    name:"Metolachlor / Dual Magnum (Corn)",
-    crops:["corn"],
-    note:"PRE — will not control emerged weeds. Lower rates on coarse soils, higher on fine/muck soils.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Coarse soils (0.67 pt)",rate:0.67,unit:"pt"},
-      {label:"Standard (1 pt)",rate:1,unit:"pt"},
-      {label:"Fine/muck soils (1.33 pt)",rate:1.33,unit:"pt"},
-    ]
-  },
-  {
-    name:"Acetochlor / Warrant (Corn)",
-    crops:["corn"],
-    note:"PRE grass & small-seeded broadleaf control. Rainfall needed for activation. Will not control emerged weeds.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Low (1 pt)",rate:1,unit:"pt"},
-      {label:"Standard (1.5 pt)",rate:1.5,unit:"pt"},
-      {label:"Heavy pressure (2 pt)",rate:2,unit:"pt"},
-    ]
-  },
-  {
-    name:"Nicosulfuron / Accent Q (Corn)",
-    crops:["corn"],
-    note:"ALS inhibitor POST. Add NIS or COC + AMS. Apply to corn V1–V8. Add atrazine for broadleaf weed control.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Standard (0.67 oz)",rate:0.67,unit:"oz"},
-      {label:"Full (1.0 oz)",rate:1,unit:"oz"},
-    ]
-  },
-  {
-    name:"Tembotrione / Laudis (Corn)",
-    crops:["corn"],
-    note:"HPPD inhibitor POST. Add MSO or COC. Apply corn V2–V8. Good on Palmer amaranth.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Standard (3 oz)",rate:3,unit:"oz"},
-      {label:"Full (3.5 oz)",rate:3.5,unit:"oz"},
-    ]
-  },
-  {
-    name:"Pyroxasulfone / Zidua (Corn)",
-    crops:["corn","soy"],
-    note:"PRE grass & broadleaf. Rainfall needed for activation. Excellent on waterhemp and Palmer amaranth.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Low (2 oz WG)",rate:2,unit:"oz"},
-      {label:"Standard (3.25 fl oz SC)",rate:3.25,unit:"oz"},
-      {label:"High (4.5 oz)",rate:4.5,unit:"oz"},
-    ]
-  },
-  {
-    name:"Acuron (Corn Premix)",
-    crops:["corn"],
-    note:"PRE/early POST premix. Soil OM <3%: 2.5 qt/A; OM ≥3%: 3 qt/A. Max 12\" tall.",
-    dUnit:"qt", dOut:"qt",
-    rates:[
-      {label:"Low OM (<3%) (2.5 qt)",rate:2.5,unit:"qt"},
-      {label:"High OM (≥3%) (3 qt)",rate:3,unit:"qt"},
-    ]
-  },
-  {
-    name:"Clopyralid / Stinger (Corn)",
-    crops:["corn"],
-    note:"Targets legumes, composites, nightshades. Max 2/3 pt/A/season. Corn only.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Low (0.33 pt)",rate:0.33,unit:"pt"},
-      {label:"Standard (0.5 pt)",rate:0.5,unit:"pt"},
-      {label:"Max (0.67 pt)",rate:0.67,unit:"pt"},
-    ]
-  },
-
-  // ═══════════════ SOYBEANS ═══════════════
-  {
-    name:"Fomesafen / Reflex (Soybeans)",
-    crops:["soy"],
-    note:"Broadleaf POST. Add COC or MSO + AMS. Do not use fomesafen more than once every 2 years. Min 15 GPA.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Low (1 pt)",rate:1,unit:"pt"},
-      {label:"Standard (1.3 pt)",rate:1.3,unit:"pt"},
-      {label:"Full (1.5 pt)",rate:1.5,unit:"pt"},
-    ]
-  },
-  {
-    name:"Flumioxazin / Valor SX (Soybeans)",
-    crops:["soy"],
-    note:"PRE only — do NOT apply to emerged soybeans. Apply 7–30 days before planting. Excellent on pigweeds.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Minimum effective (2 oz)",rate:2,unit:"oz"},
-      {label:"Standard (2.5 oz)",rate:2.5,unit:"oz"},
-      {label:"Max (3 oz)",rate:3,unit:"oz"},
-    ]
-  },
-  {
-    name:"Metribuzin / Sencor (Soybeans)",
-    crops:["soy"],
-    note:"PRE only — do NOT apply to emerged soybeans. Check label for sensitive varieties. Min 5–6 oz for waterhemp.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Low (5 oz 75DF)",rate:5,unit:"oz"},
-      {label:"Standard (6 oz 75DF)",rate:6,unit:"oz"},
-      {label:"Max for soil type (8 oz 75DF)",rate:8,unit:"oz"},
-    ]
-  },
-  {
-    name:"Sulfentrazone / Authority (Soybeans)",
-    crops:["soy"],
-    note:"PRE broadleaf. Do NOT apply to emerged soybeans. Good on Palmer amaranth and waterhemp.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Minimum (6 oz 4F)",rate:6,unit:"oz"},
-      {label:"Standard (8 oz 4F)",rate:8,unit:"oz"},
-      {label:"Full (12 oz 4F)",rate:12,unit:"oz"},
-    ]
-  },
-  {
-    name:"Prefix / S-metolachlor+Fomesafen (Soy)",
-    crops:["soy"],
-    note:"PRE premix. Apply up to 14 days before planting through PRE. Do not use on fields west of US Hwy 281.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Sandy soils (2 pt)",rate:2,unit:"pt"},
-      {label:"Standard (2.33 pt)",rate:2.33,unit:"pt"},
-      {label:"Fine soils (3 pt)",rate:3,unit:"pt"},
-    ]
-  },
-  {
-    name:"Imazethapyr / Pursuit (Soybeans)",
-    crops:["soy"],
-    note:"ALS inhibitor POST. Apply before soybeans bloom. Weeds must be actively growing and <3\". Add COC.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Standard (4 oz)",rate:4,unit:"oz"},
-    ]
-  },
-  {
-    name:"Metolachlor / Dual Magnum (Soybeans)",
-    crops:["soy"],
-    note:"POST residual — apply emergence thru 3rd trifoliate. Must tank-mix with foliar herbicide for emerged weeds.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Standard (1 pt)",rate:1,unit:"pt"},
-      {label:"Max (1.33 pt)",rate:1.33,unit:"pt"},
-    ]
-  },
-  {
-    name:"Acetochlor / Warrant (Soybeans)",
-    crops:["soy"],
-    note:"POST residual — apply after emergence thru R2. Tank-mix with foliar herbicide. Min 15 GPA.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Coarse soils (1.25 qt)",rate:1.25,unit:"qt"},
-      {label:"Standard V2–V3 (1.5 qt)",rate:1.5,unit:"qt"},
-      {label:"Fine soils (2 qt)",rate:2,unit:"qt"},
-    ]
-  },
-  {
-    name:"Pyroxasulfone / Zidua (Soybeans)",
-    crops:["soy"],
-    note:"PRE grass & broadleaf. Excellent on waterhemp, Palmer, and foxtails. Rainfall needed for activation.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Low (2 oz WG)",rate:2,unit:"oz"},
-      {label:"Standard (3.25 fl oz SC)",rate:3.25,unit:"oz"},
-    ]
-  },
-  {
-    name:"Dimethenamid / Outlook (Soybeans)",
-    crops:["soy"],
-    note:"PRE/POST residual grass & small broadleaf. Apply emergence thru 5th trifoliate. Coarse soils 12–18 oz; medium/fine 14–21 oz.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Coarse soils (12 oz)",rate:12,unit:"oz"},
-      {label:"Standard (16 oz)",rate:16,unit:"oz"},
-      {label:"Fine soils (21 oz)",rate:21,unit:"oz"},
-    ]
-  },
-
-  // ═══════════════ COTTON ═══════════════
-  {
-    name:"Diuron 4L (Cotton)",
-    crops:["cotton"],
-    note:"PRE/directed. Avoid sandy soils or <1% OM. Do not apply another diuron within 21 days. Apply as directed spray.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Sandy soils / light (1 pt)",rate:1,unit:"pt"},
-      {label:"Standard (1.5 pt)",rate:1.5,unit:"pt"},
-      {label:"Heavy soils (2 pt)",rate:2,unit:"pt"},
-    ]
-  },
-  {
-    name:"MSMA (Cotton – Directed)",
-    crops:["cotton"],
-    note:"Directed spray only. Apply when cotton is ≥12\" tall. Do NOT apply after first bloom. Add surfactant.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Standard directed (2 pt)",rate:2,unit:"pt"},
-      {label:"Full rate (2.5 pt)",rate:2.5,unit:"pt"},
-    ]
-  },
-  {
-    name:"Fluometuron / Cotoran (Cotton)",
-    crops:["cotton"],
-    note:"PRE broadleaf. Adjust rate for soil texture — lower on sandy, higher on clay. Good on pigweeds and morningglory.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Light soils (1.5 pt)",rate:1.5,unit:"pt"},
-      {label:"Standard (2 pt)",rate:2,unit:"pt"},
-      {label:"Heavy clay (2.5 pt)",rate:2.5,unit:"pt"},
-    ]
-  },
-  {
-    name:"Prometryn / Caparol (Cotton)",
-    crops:["cotton"],
-    note:"PRE broadleaf grass control. Avoid use on coarse sands. Often combined with MSMA as directed.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Standard (1.5 pt)",rate:1.5,unit:"pt"},
-      {label:"Full (2 pt)",rate:2,unit:"pt"},
-    ]
-  },
-  {
-    name:"Pyrithiobac / Staple (Cotton)",
-    crops:["cotton"],
-    note:"POST broadleaf. Apply overtop from cotyledon to 60 days pre-harvest. Max 5.1 fl oz total/season. Add NIS.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Standard (1.7 oz)",rate:1.7,unit:"oz"},
-      {label:"Full (2.5 oz)",rate:2.5,unit:"oz"},
-    ]
-  },
-  {
-    name:"Flumioxazin / Valor (Cotton PRE)",
-    crops:["cotton"],
-    note:"PRE burndown. Apply 7–30 days before planting. Excellent on pigweeds and morningglory.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Standard (1 oz)",rate:1,unit:"oz"},
-      {label:"Full (2 oz)",rate:2,unit:"oz"},
-    ]
-  },
-  {
-    name:"S-Metolachlor / Dual Magnum (Cotton)",
-    crops:["cotton"],
-    note:"PRE grass control. Apply preemergence after planting. Very effective on doveweed if pre-germination.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Standard (1 pt)",rate:1,unit:"pt"},
-      {label:"Heavy (1.33 pt)",rate:1.33,unit:"pt"},
-    ]
-  },
-  {
-    name:"Fomesafen / Reflex (Cotton PRE)",
-    crops:["cotton"],
-    note:"PRE sandy Coastal Plain soils ONLY — do NOT use on clay soils. Tank-mix with diuron or Warrant.",
-    dUnit:"oz", dOut:"oz",
-    rates:[
-      {label:"Standard (10 oz)",rate:10,unit:"oz"},
-    ]
-  },
-  {
-    name:"Acetochlor / Warrant (Cotton)",
-    crops:["cotton"],
-    note:"PRE grass. Rainfall needed for activation. Often combined with diuron + fomesafen as a 3-way PRE.",
-    dUnit:"pt", dOut:"pt",
-    rates:[
-      {label:"Standard (2 pt)",rate:2,unit:"pt"},
-    ]
-  },
-  // CORN PREMIXES
-  { name:"Halex GT (Corn)", crops:["corn"], note:"Premix: glyphosate + mesotrione + S-metolachlor. PRE through V6. Add NIS or COC + AMS. Do not apply to corn over 30 in or beyond V6.", dUnit:"qt", dOut:"qt",
-    rates:[{label:"Coarse soils (3 qt)",rate:3,unit:"qt"},{label:"Standard (3.5 qt)",rate:3.5,unit:"qt"},{label:"Fine soils (3.6 qt)",rate:3.6,unit:"qt"}]},
-  { name:"Tavium Plus VaporGrip (Corn/Soy)", crops:["corn","soy"], note:"Dicamba + S-metolachlor premix. Dicamba-tolerant varieties ONLY. Apply up to V4/45 days post-plant soy. 240-ft downwind buffer required.", dUnit:"pt", dOut:"pt",
-    rates:[{label:"Standard corn (3 pt)",rate:3,unit:"pt"},{label:"Standard soy (2.5 pt)",rate:2.5,unit:"pt"}]},
-  { name:"Corvus (Corn)", crops:["corn"], note:"RESTRICTED USE. Isoxaflutole + thiencarbazone PRE. CORN ONLY. Do NOT use on irrigated sandy soils. Rotational restriction: soy/cotton 10 months.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Standard (3 oz)",rate:3,unit:"oz"},{label:"Full rate (3.5 oz)",rate:3.5,unit:"oz"}]},
-  { name:"Impact / Armezon (Corn)", crops:["corn"], note:"Topramezone HPPD inhibitor POST. Add MSO 1% v/v + AMS. Apply corn V2-V6. Excellent on waterhemp and Palmer. Max 1.5 oz/A/year.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Standard (0.75 oz)",rate:0.75,unit:"oz"},{label:"Full (1.5 oz)",rate:1.5,unit:"oz"}]},
-  { name:"Anthem ATZ (Corn)", crops:["corn"], note:"Pyroxasulfone + carfentrazone + atrazine PRE premix. Apply at or before corn emergence. Excellent on waterhemp. Rainfall needed.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Coarse soils (55 oz)",rate:55,unit:"oz"},{label:"Standard (64 oz)",rate:64,unit:"oz"},{label:"Fine soils (75 oz)",rate:75,unit:"oz"}]},
-  { name:"Resicore (Corn)", crops:["corn"], note:"Acetochlor + mesotrione + clopyralid premix. PRE/early POST. Apply from 2 weeks pre to V4. Do NOT apply to sweet corn or popcorn.", dUnit:"qt", dOut:"qt",
-    rates:[{label:"Low (1.25 qt)",rate:1.25,unit:"qt"},{label:"Standard (1.5 qt)",rate:1.5,unit:"qt"},{label:"Full (1.75 qt)",rate:1.75,unit:"qt"}]},
-  // SOYBEAN ADDITIONAL
-  { name:"Enlist One (Soybeans)", crops:["soy"], note:"2,4-D choline. Enlist E3 soybeans ONLY. Apply PRE or POST up to R2. Max 48 oz/A/app. Add MSO or COC. 300-ft downwind buffer.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Standard POST (32 oz)",rate:32,unit:"oz"},{label:"Full POST (48 oz)",rate:48,unit:"oz"}]},
-  { name:"Flexstar GT (Soybeans)", crops:["soy"], note:"Fomesafen + glyphosate premix POST. Add COC or MSO + AMS. Apply before bloom (R1). Max 2.5 pt/A/season. Do not use fomesafen 2 years in a row.", dUnit:"pt", dOut:"pt",
-    rates:[{label:"Standard (2 pt)",rate:2,unit:"pt"},{label:"Full (2.5 pt)",rate:2.5,unit:"pt"}]},
-  { name:"Cobra / Lactofen (Soybeans)", crops:["soy"], note:"PPO inhibitor POST. Max 6 oz/A for most mixes. Apply to small weeds 2-4 in. Expect 10-20% soybean bronzing - typically temporary.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Low rate / tank mix (6 oz)",rate:6,unit:"oz"},{label:"Standard (12.5 oz)",rate:12.5,unit:"oz"}]},
-  { name:"Kyber (Soybeans PRE)", crops:["soy"], note:"Flumioxazin + metribuzin + pyroxasulfone 3-way PRE premix. Apply at or after planting. Excellent on waterhemp, Palmer, foxtails. Rainfall needed.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Coarse soils (3.5 oz)",rate:3.5,unit:"oz"},{label:"Standard (4.5 oz)",rate:4.5,unit:"oz"},{label:"Fine soils (6 oz)",rate:6,unit:"oz"}]},
-  { name:"Reviton / Tiafenacil (Burndown)", crops:["soy","general"], note:"Group 14 burndown. PRE up to 1.5 oz on medium/fine soils. Burndown up to 3 oz. Add MSO 1% v/v. Max 6 oz/season. Do not apply POST to emerged soybeans.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Burndown (1.5 oz)",rate:1.5,unit:"oz"},{label:"Standard burndown (2 oz)",rate:2,unit:"oz"},{label:"Max burndown (3 oz)",rate:3,unit:"oz"}]},
-  { name:"Enlist Duo (Soybeans)", crops:["soy"], note:"2,4-D choline + glyphosate premix. Enlist E3 soybeans ONLY. Apply POST up to R2.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Standard (64 oz = 2 qt)",rate:64,unit:"oz"},{label:"Full (80 oz = 2.5 qt)",rate:80,unit:"oz"}]},
-  // COTTON ADDITIONAL
-  { name:"Envoke / Trifloxysulfuron (Cotton)", crops:["cotton"], note:"ALS inhibitor POST. Very low use rate. Apply overtop or directed. Max 0.285 oz/A/season. Excellent on yellow nutsedge and morningglory.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Standard overtop (0.1 oz)",rate:0.1,unit:"oz"},{label:"Full rate (0.285 oz)",rate:0.285,unit:"oz"}]},
-  { name:"Suprend (Cotton)", crops:["cotton"], note:"Prometryn + fluometuron + MSMA premix directed spray. Apply as directed spray when cotton is 6+ in tall.", dUnit:"qt", dOut:"qt",
-    rates:[{label:"Standard directed (1.5 qt)",rate:1.5,unit:"qt"},{label:"Full (2 qt)",rate:2,unit:"qt"}]},
-  { name:"Brake / Fluridone (Cotton)", crops:["cotton"], note:"PRE grass and broadleaf. Good on sandhill soils. Avoid clay soils. Corn/sorghum rotation 10 months.", dUnit:"pt", dOut:"pt",
-    rates:[{label:"Sandy soils (1 pt)",rate:1,unit:"pt"},{label:"Standard (1.5 pt)",rate:1.5,unit:"pt"}]},
-  { name:"Aim EC / Carfentrazone", crops:["cotton","corn","soy","general"], note:"Group 14 contact burndown. Very fast-acting. Add NIS 0.25% v/v. Tank-mix with glyphosate for burndown. Max 2 oz/A/year in cotton.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Burndown (1 oz)",rate:1,unit:"oz"},{label:"Standard (1.6 oz)",rate:1.6,unit:"oz"},{label:"Max cotton (2 oz)",rate:2,unit:"oz"}]},
-  // NEW GLYPHOSATE & GLUFOSINATE
-  { name:"Roundup PowerMax 3", crops:["general","corn","soy","cotton"], note:"4.8 lb ae/gal. Built-in surfactant - do NOT add COC/MSO. Use 10-15 GPA. Max 44 oz/application in-crop.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Small weeds (16 oz)",rate:16,unit:"oz"},{label:"Standard (22 oz)",rate:22,unit:"oz"},{label:"Medium weeds (33 oz)",rate:33,unit:"oz"},{label:"Large / heavy pressure (36 oz)",rate:36,unit:"oz"},{label:"Max in-crop (44 oz)",rate:44,unit:"oz"}]},
-  { name:"Glyphosate 53.8% (Generic)", crops:["general","corn","soy","cotton"], note:"~5.5 lb ai/gal. Fewer oz needed vs 41%. Add AMS in hard water. Do NOT add COC/MSO.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Small weeds (16 oz)",rate:16,unit:"oz"},{label:"Standard (22 oz)",rate:22,unit:"oz"},{label:"Medium weeds (32 oz)",rate:32,unit:"oz"},{label:"Large / perennials (44 oz)",rate:44,unit:"oz"}]},
-  { name:"Liberty Ultra (Glufosinate-P)", crops:["general","corn","soy","cotton"], note:"Glu-L technology - 24 oz replaces 32 oz standard Liberty. Min 15-20 GPA. Add AMS 1.5-3 lb/A. Apply sunny warm conditions. Max 34 oz/application.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Standard POST (24 oz)",rate:24,unit:"oz"},{label:"Dense/tall weeds (29 oz)",rate:29,unit:"oz"},{label:"Max labeled rate (34 oz)",rate:34,unit:"oz"}]},
-  { name:"AMS Hotshot (Liquid AMS + Adjuvant)", crops:["general","corn","soy","cotton"], note:"All-in-one liquid AMS + drift control + adjuvant. Use 32-48 oz/A. Replaces dry AMS + surfactant.", dUnit:"oz", dOut:"oz",
-    rates:[{label:"Light / soft water (32 oz = 1 qt)",rate:32,unit:"oz"},{label:"Standard (40 oz)",rate:40,unit:"oz"},{label:"Hard water / heavy pressure (48 oz = 1.5 qt)",rate:48,unit:"oz"}]}
+ 
+// ── Unit System ───────────────────────────────────────────────────────────────
+// Liquid units scale: fl oz → pt → qt → gal
+// Dry units scale:    dry oz → lb
+ 
+var LIQUID_UNITS = ['fl oz', 'pt', 'qt', 'gal'];
+var DRY_UNITS    = ['dry oz', 'lb'];
+var ALL_UNITS    = LIQUID_UNITS.concat(DRY_UNITS);
+ 
+// How many fl oz (or dry oz) each unit equals
+var UNIT_TO_OZ = { 'fl oz': 1, pt: 16, qt: 32, gal: 128, 'dry oz': 1, lb: 16 };
+ 
+// Convert a value from one unit to another
+function convertUnits(value, fromUnit, toUnit) {
+  return value * UNIT_TO_OZ[fromUnit] / UNIT_TO_OZ[toUnit];
+}
+ 
+// Build a <select> options string grouped by Liquid / Dry
+function buildUnitOptions(selectedUnit) {
+  var liquid = LIQUID_UNITS.map(function(u) {
+    return '<option' + (u === selectedUnit ? ' selected' : '') + '>' + u + '</option>';
+  }).join('');
+  var dry = DRY_UNITS.map(function(u) {
+    return '<option' + (u === selectedUnit ? ' selected' : '') + '>' + u + '</option>';
+  }).join('');
+  return '<optgroup label="Liquid">' + liquid + '</optgroup>' +
+         '<optgroup label="Dry">' + dry + '</optgroup>';
+}
+ 
+// ── App State ─────────────────────────────────────────────────────────────────
+var currentMode = 'tank';  // 'tank' | 'acre' | 'season'
+var currentCrop = 'all';   // 'all' | 'corn' | 'soy' | 'cotton' | 'general'
+ 
+// ── Chemical Database ─────────────────────────────────────────────────────────
+// Each chemical: { n: name, c: crops[], note: string, u: defaultUnit, rates: [{l: label, r: rate, u: unit}] }
+ 
+var CHEMICALS = [
+  // GENERAL / MULTI-CROP
+  {n:'Glyphosate (Generic 41%)',c:['general','corn','soy','cotton'],note:'Standard POST. AMS preferred in hard water. COC is compatible but adds little benefit — AMS gives better results at lower cost.',u:'fl oz',rates:[{l:'Small weeds <4" (20 fl oz)',r:20,u:'fl oz'},{l:'Standard (32 fl oz)',r:32,u:'fl oz'},{l:'Medium 6-12" (48 fl oz)',r:48,u:'fl oz'},{l:'Large >12" (64 fl oz)',r:64,u:'fl oz'}]},
+  {n:'Glyphosate (Roundup Branded)',c:['general','corn','soy','cotton'],note:'Higher concentration than generic.',u:'fl oz',rates:[{l:'Standard (22 fl oz)',r:22,u:'fl oz'},{l:'Medium (33 fl oz)',r:33,u:'fl oz'},{l:'Large (44 fl oz)',r:44,u:'fl oz'}]},
+  {n:'Roundup PowerMax 3',c:['general','corn','soy','cotton'],note:'4.8 lb ae/gal. Built-in surfactant — do NOT add COC/MSO. Max 44 fl oz/application in-crop.',u:'fl oz',rates:[{l:'Small (16 fl oz)',r:16,u:'fl oz'},{l:'Standard (22 fl oz)',r:22,u:'fl oz'},{l:'Medium (33 fl oz)',r:33,u:'fl oz'},{l:'Large/heavy (36 fl oz)',r:36,u:'fl oz'},{l:'Max in-crop (44 fl oz)',r:44,u:'fl oz'}]},
+  {n:'Glyphosate 53.8% (Generic)',c:['general','corn','soy','cotton'],note:'Higher concentration than 41% — fewer fl oz needed per acre. AMS preferred in hard water. COC is compatible but adds little benefit over AMS.',u:'fl oz',rates:[{l:'Small (16 fl oz)',r:16,u:'fl oz'},{l:'Standard (22 fl oz)',r:22,u:'fl oz'},{l:'Medium (32 fl oz)',r:32,u:'fl oz'},{l:'Large/perennials (44 fl oz)',r:44,u:'fl oz'}]},
+  {n:'Liberty / Glufosinate',c:['general','corn','soy','cotton'],note:'Contact — needs 15-20 GPA. Always add AMS 1.5-3 lb/A. Apply warm sunny conditions.',u:'fl oz',rates:[{l:'Burndown (29 fl oz)',r:29,u:'fl oz'},{l:'Standard POST (32 fl oz)',r:32,u:'fl oz'},{l:'Dense/tall (36 fl oz)',r:36,u:'fl oz'},{l:'Max (43 fl oz)',r:43,u:'fl oz'}]},
+  {n:'Liberty Ultra (Glufosinate-P)',c:['general','corn','soy','cotton'],note:'Next-gen glufosinate. 24 fl oz replaces 32 fl oz Liberty. Min 15-20 GPA. Add AMS 1.5-3 lb/A.',u:'fl oz',rates:[{l:'Standard POST (24 fl oz)',r:24,u:'fl oz'},{l:'Dense/tall (29 fl oz)',r:29,u:'fl oz'},{l:'Max (34 fl oz)',r:34,u:'fl oz'}]},
+  {n:'Paraquat (Gramoxone) - RESTRICTED',c:['general','corn','soy','cotton'],note:'RESTRICTED USE. Contact — coverage critical. Add NIS or COC. Certified applicator required.',u:'fl oz',rates:[{l:'Low (24 fl oz)',r:24,u:'fl oz'},{l:'Standard (32 fl oz)',r:32,u:'fl oz'},{l:'Heavy (40 fl oz)',r:40,u:'fl oz'}]},
+  {n:'2,4-D Amine',c:['general','corn','cotton'],note:'Observe pre-plant intervals (7-30 days).',u:'pt',rates:[{l:'Low (0.5 pt)',r:.5,u:'pt'},{l:'Standard (1 pt)',r:1,u:'pt'},{l:'Max (1 qt)',r:1,u:'qt'}]},
+  {n:'Dicamba (Banvel/Engenia)',c:['general','corn','cotton'],note:'Check state/label restrictions. Observe buffer zones.',u:'pt',rates:[{l:'Low (0.25 pt)',r:.25,u:'pt'},{l:'Standard (0.5 pt)',r:.5,u:'pt'},{l:'Max burndown (1 pt)',r:1,u:'pt'}]},
+  {n:'AMS - Ammonium Sulfate',c:['general','corn','soy','cotton'],note:'Water conditioner. 8.5-17 lb per 100 gal. Add BEFORE herbicide.',u:'lb',rates:[{l:'Soft water (1 lb/A)',r:1,u:'lb'},{l:'Standard (1.5 lb/A)',r:1.5,u:'lb'},{l:'Hard water (2 lb/A)',r:2,u:'lb'},{l:'Very hard (3 lb/A)',r:3,u:'lb'}]},
+  {n:'AMS Hotshot (Liquid AMS)',c:['general','corn','soy','cotton'],note:'All-in-one liquid AMS + drift control. Replaces dry AMS + surfactant.',u:'fl oz',rates:[{l:'Soft water (32 fl oz)',r:32,u:'fl oz'},{l:'Standard (40 fl oz)',r:40,u:'fl oz'},{l:'Hard water (48 fl oz)',r:48,u:'fl oz'}]},
+  {n:'Crop Oil Concentrate (COC)',c:['general','corn','soy','cotton'],note:'Use 1-2 pt/A or 1% v/v. Do NOT use with Liberty/glufosinate.',u:'pt',rates:[{l:'Light (1 pt/A)',r:1,u:'pt'},{l:'Standard (1.5 pt/A)',r:1.5,u:'pt'},{l:'Heavy (2 pt/A)',r:2,u:'pt'}]},
+  {n:'White Water (COC)',c:['general','corn','soy','cotton'],note:'Brand COC adjuvant. Use 1-2 pt/A or 1% v/v. Do NOT use with Liberty.',u:'pt',rates:[{l:'Light (1 pt/A)',r:1,u:'pt'},{l:'Standard (1.5 pt/A)',r:1.5,u:'pt'},{l:'Heavy (2 pt/A)',r:2,u:'pt'}]},
+  {n:'NIS - Non-Ionic Surfactant',c:['general','corn','soy','cotton'],note:'Use 0.25% v/v (1 qt/100 gal). Required with many POST herbicides.',u:'fl oz',rates:[{l:'0.25% at 10 GPA (4 fl oz)',r:4,u:'fl oz'},{l:'0.25% at 15 GPA (6 fl oz)',r:6,u:'fl oz'},{l:'0.25% at 20 GPA (8 fl oz)',r:8,u:'fl oz'}]},
+  {n:'Clethodim (Select Max)',c:['general','corn','soy','cotton'],note:'Grass herbicide. Do NOT tank-mix with 2,4-D or dicamba. Add COC 1% v/v.',u:'fl oz',rates:[{l:'Low (6 fl oz)',r:6,u:'fl oz'},{l:'Standard (9 fl oz)',r:9,u:'fl oz'},{l:'Max (16 fl oz)',r:16,u:'fl oz'}]},
+  {n:'Saflufenacil (Sharpen)',c:['general','corn','soy','cotton'],note:'PRE/burndown. Add MSO 1% v/v.',u:'fl oz',rates:[{l:'Burndown only (1 fl oz)',r:1,u:'fl oz'},{l:'Standard residual (2 fl oz)',r:2,u:'fl oz'}]},
+  {n:'Aim EC / Carfentrazone',c:['cotton','corn','soy','general'],note:'Group 14 contact burndown. Add NIS 0.25% v/v. Max 2 fl oz/A/year in cotton.',u:'fl oz',rates:[{l:'Burndown (1 fl oz)',r:1,u:'fl oz'},{l:'Standard (1.6 fl oz)',r:1.6,u:'fl oz'},{l:'Max cotton (2 fl oz)',r:2,u:'fl oz'}]},
+  {n:'Reviton / Tiafenacil',c:['soy','general'],note:'Group 14 burndown. Add MSO 1% v/v. Max 6 fl oz/season. Do not apply POST to emerged soybeans.',u:'fl oz',rates:[{l:'Burndown (1.5 fl oz)',r:1.5,u:'fl oz'},{l:'Standard (2 fl oz)',r:2,u:'fl oz'},{l:'Max (3 fl oz)',r:3,u:'fl oz'}]},
+  // CORN
+  {n:'Atrazine 4L (Corn)',c:['corn'],note:'CORN ONLY. Max 2 lb ai/A POST. Do not apply if corn >12" tall.',u:'pt',rates:[{l:'Low (0.5 pt)',r:.5,u:'pt'},{l:'Standard (1 pt)',r:1,u:'pt'},{l:'Full PRE (2 pt)',r:2,u:'pt'}]},
+  {n:'Mesotrione / Callisto (Corn)',c:['corn'],note:'Add COC 1% v/v + AMS. Max 7.7 fl oz/A/year.',u:'fl oz',rates:[{l:'POST standard (3 fl oz)',r:3,u:'fl oz'},{l:'PRE standard (5.3 fl oz)',r:5.3,u:'fl oz'},{l:'PRE max (7.7 fl oz)',r:7.7,u:'fl oz'}]},
+  {n:'Metolachlor / Dual Magnum (Corn)',c:['corn'],note:'PRE only. Lower rates on coarse soils.',u:'pt',rates:[{l:'Coarse soils (0.67 pt)',r:.67,u:'pt'},{l:'Standard (1 pt)',r:1,u:'pt'},{l:'Fine soils (1.33 pt)',r:1.33,u:'pt'}]},
+  {n:'Acetochlor / Warrant (Corn)',c:['corn'],note:'PRE grass control. Rainfall needed for activation.',u:'pt',rates:[{l:'Low (1 pt)',r:1,u:'pt'},{l:'Standard (1.5 pt)',r:1.5,u:'pt'},{l:'Heavy (2 pt)',r:2,u:'pt'}]},
+  {n:'Nicosulfuron / Accent Q (Corn)',c:['corn'],note:'POST corn V1-V8. Add NIS or COC + AMS.',u:'fl oz',rates:[{l:'Standard (0.67 fl oz)',r:.67,u:'fl oz'},{l:'Full (1.0 fl oz)',r:1,u:'fl oz'}]},
+  {n:'Tembotrione / Laudis (Corn)',c:['corn'],note:'HPPD POST. Add MSO or COC. Apply corn V2-V8.',u:'fl oz',rates:[{l:'Standard (3 fl oz)',r:3,u:'fl oz'},{l:'Full (3.5 fl oz)',r:3.5,u:'fl oz'}]},
+  {n:'Pyroxasulfone / Zidua',c:['corn','soy'],note:'PRE grass & broadleaf. Excellent on waterhemp and Palmer amaranth.',u:'fl oz',rates:[{l:'Low (2 fl oz)',r:2,u:'fl oz'},{l:'Standard (3.25 fl oz)',r:3.25,u:'fl oz'},{l:'High (4.5 fl oz)',r:4.5,u:'fl oz'}]},
+  {n:'Acuron (Corn Premix)',c:['corn'],note:'PRE/early POST. OM <3%: 2.5 qt/A; OM 3%+: 3 qt/A. Max 12" tall.',u:'qt',rates:[{l:'Low OM (2.5 qt)',r:2.5,u:'qt'},{l:'High OM (3 qt)',r:3,u:'qt'}]},
+  {n:'Halex GT (Corn)',c:['corn'],note:'Premix: glyphosate + mesotrione + S-metolachlor. PRE through V6.',u:'qt',rates:[{l:'Coarse soils (3 qt)',r:3,u:'qt'},{l:'Standard (3.5 qt)',r:3.5,u:'qt'},{l:'Fine soils (3.6 qt)',r:3.6,u:'qt'}]},
+  {n:'Resicore (Corn)',c:['corn'],note:'Acetochlor + mesotrione + clopyralid PRE/early POST to V4. Not for sweet corn.',u:'qt',rates:[{l:'Low (1.25 qt)',r:1.25,u:'qt'},{l:'Standard (1.5 qt)',r:1.5,u:'qt'},{l:'Full (1.75 qt)',r:1.75,u:'qt'}]},
+  {n:'Corvus (Corn)',c:['corn'],note:'RESTRICTED USE. PRE CORN ONLY. Do NOT use on irrigated sandy soils.',u:'fl oz',rates:[{l:'Standard (3 fl oz)',r:3,u:'fl oz'},{l:'Full (3.5 fl oz)',r:3.5,u:'fl oz'}]},
+  {n:'Impact / Armezon (Corn)',c:['corn'],note:'HPPD POST. Add MSO 1% v/v + AMS. Apply corn V2-V6. Max 1.5 fl oz/A/year.',u:'fl oz',rates:[{l:'Standard (0.75 fl oz)',r:.75,u:'fl oz'},{l:'Full (1.5 fl oz)',r:1.5,u:'fl oz'}]},
+  {n:'Anthem ATZ (Corn)',c:['corn'],note:'PRE premix. Apply at/before corn emergence. Rainfall needed.',u:'fl oz',rates:[{l:'Coarse soils (55 fl oz)',r:55,u:'fl oz'},{l:'Standard (64 fl oz)',r:64,u:'fl oz'},{l:'Fine soils (75 fl oz)',r:75,u:'fl oz'}]},
+  {n:'Clopyralid / Stinger (Corn)',c:['corn'],note:'Targets legumes, composites. Max 2/3 pt/A/season.',u:'pt',rates:[{l:'Low (0.33 pt)',r:.33,u:'pt'},{l:'Standard (0.5 pt)',r:.5,u:'pt'},{l:'Max (0.67 pt)',r:.67,u:'pt'}]},
+  {n:'Tavium Plus VaporGrip',c:['corn','soy'],note:'Dicamba-tolerant varieties ONLY. Apply up to V4/45 days post-plant soy. 240-ft buffer.',u:'pt',rates:[{l:'Standard corn (3 pt)',r:3,u:'pt'},{l:'Standard soy (2.5 pt)',r:2.5,u:'pt'}]},
+  // SOYBEANS
+  {n:'Fomesafen / Reflex (Soybeans)',c:['soy'],note:'Broadleaf POST. Add COC or MSO + AMS. Do not use more than once every 2 years. Min 15 GPA.',u:'pt',rates:[{l:'Low (1 pt)',r:1,u:'pt'},{l:'Standard (1.3 pt)',r:1.3,u:'pt'},{l:'Full (1.5 pt)',r:1.5,u:'pt'}]},
+  {n:'Flumioxazin / Valor SX (Soybeans)',c:['soy'],note:'PRE ONLY. Apply 7-30 days before planting.',u:'fl oz',rates:[{l:'Minimum (2 fl oz)',r:2,u:'fl oz'},{l:'Standard (2.5 fl oz)',r:2.5,u:'fl oz'},{l:'Max (3 fl oz)',r:3,u:'fl oz'}]},
+  {n:'Metribuzin / Sencor (Soybeans)',c:['soy'],note:'PRE ONLY. Check label for sensitive varieties.',u:'dry oz',rates:[{l:'Low (5 dry oz)',r:5,u:'dry oz'},{l:'Standard (6 dry oz)',r:6,u:'dry oz'},{l:'Max (8 dry oz)',r:8,u:'dry oz'}]},
+  {n:'Sulfentrazone / Authority (Soybeans)',c:['soy'],note:'PRE broadleaf. Do NOT apply to emerged soybeans.',u:'fl oz',rates:[{l:'Minimum (6 fl oz)',r:6,u:'fl oz'},{l:'Standard (8 fl oz)',r:8,u:'fl oz'},{l:'Full (12 fl oz)',r:12,u:'fl oz'}]},
+  {n:'Prefix (Soy)',c:['soy'],note:'PRE premix. Apply up to 14 days before planting. Do not use west of US Hwy 281.',u:'pt',rates:[{l:'Sandy soils (2 pt)',r:2,u:'pt'},{l:'Standard (2.33 pt)',r:2.33,u:'pt'},{l:'Fine soils (3 pt)',r:3,u:'pt'}]},
+  {n:'Imazethapyr / Pursuit (Soybeans)',c:['soy'],note:'ALS POST. Apply before bloom. Weeds must be <3" and actively growing.',u:'fl oz',rates:[{l:'Standard (4 fl oz)',r:4,u:'fl oz'}]},
+  {n:'Acetochlor / Warrant (Soybeans)',c:['soy'],note:'POST residual. Apply after emergence thru R2. Tank-mix with foliar herbicide. Min 15 GPA.',u:'pt',rates:[{l:'Coarse soils (1.25 qt)',r:1.25,u:'qt'},{l:'Standard (1.5 qt)',r:1.5,u:'qt'},{l:'Fine soils (2 qt)',r:2,u:'qt'}]},
+  {n:'Dimethenamid / Outlook (Soybeans)',c:['soy'],note:'PRE/POST residual. Apply emergence thru 5th trifoliate.',u:'fl oz',rates:[{l:'Coarse soils (12 fl oz)',r:12,u:'fl oz'},{l:'Standard (16 fl oz)',r:16,u:'fl oz'},{l:'Fine soils (21 fl oz)',r:21,u:'fl oz'}]},
+  {n:'Enlist One (Soybeans)',c:['soy'],note:'Enlist E3 soybeans ONLY. Apply PRE or POST up to R2. 300-ft buffer.',u:'fl oz',rates:[{l:'Standard POST (32 fl oz)',r:32,u:'fl oz'},{l:'Full POST (48 fl oz)',r:48,u:'fl oz'}]},
+  {n:'Enlist Duo (Soybeans)',c:['soy'],note:'Enlist E3 soybeans ONLY. Apply POST up to R2.',u:'fl oz',rates:[{l:'Standard (64 fl oz)',r:64,u:'fl oz'},{l:'Full (80 fl oz)',r:80,u:'fl oz'}]},
+  {n:'Flexstar GT (Soybeans)',c:['soy'],note:'Fomesafen + glyphosate premix POST. Apply before bloom (R1). Max 2.5 pt/A/season.',u:'pt',rates:[{l:'Standard (2 pt)',r:2,u:'pt'},{l:'Full (2.5 pt)',r:2.5,u:'pt'}]},
+  {n:'Cobra / Lactofen (Soybeans)',c:['soy'],note:'PPO POST. Expect 10-20% bronzing - temporary. Apply to small weeds 2-4".',u:'fl oz',rates:[{l:'Tank mix (6 fl oz)',r:6,u:'fl oz'},{l:'Standard (12.5 fl oz)',r:12.5,u:'fl oz'}]},
+  {n:'Kyber (Soybeans PRE)',c:['soy'],note:'3-way PRE premix. Excellent on waterhemp, Palmer, foxtails. Rainfall needed.',u:'fl oz',rates:[{l:'Coarse soils (3.5 fl oz)',r:3.5,u:'fl oz'},{l:'Standard (4.5 fl oz)',r:4.5,u:'fl oz'},{l:'Fine soils (6 fl oz)',r:6,u:'fl oz'}]},
+  {n:'Metolachlor / Dual Magnum (Soybeans)',c:['soy'],note:'POST residual. Must tank-mix with foliar herbicide for emerged weeds.',u:'pt',rates:[{l:'Standard (1 pt)',r:1,u:'pt'},{l:'Max (1.33 pt)',r:1.33,u:'pt'}]},
+  {n:'Pyroxasulfone / Zidua (Soybeans)',c:['soy'],note:'PRE grass & broadleaf. Rainfall needed for activation.',u:'fl oz',rates:[{l:'Low (2 fl oz)',r:2,u:'fl oz'},{l:'Standard (3.25 fl oz)',r:3.25,u:'fl oz'}]},
+  // COTTON
+  {n:'Diuron 4L (Cotton)',c:['cotton'],note:'PRE/directed. Avoid sandy soils or <1% OM.',u:'pt',rates:[{l:'Sandy soils (1 pt)',r:1,u:'pt'},{l:'Standard (1.5 pt)',r:1.5,u:'pt'},{l:'Heavy soils (2 pt)',r:2,u:'pt'}]},
+  {n:'MSMA (Cotton - Directed)',c:['cotton'],note:'Directed spray. Apply when cotton 12"+ tall. Do NOT apply after first bloom.',u:'pt',rates:[{l:'Standard directed (2 pt)',r:2,u:'pt'},{l:'Full rate (2.5 pt)',r:2.5,u:'pt'}]},
+  {n:'Fluometuron / Cotoran (Cotton)',c:['cotton'],note:'PRE broadleaf. Lower on sandy, higher on clay.',u:'pt',rates:[{l:'Light soils (1.5 pt)',r:1.5,u:'pt'},{l:'Standard (2 pt)',r:2,u:'pt'},{l:'Heavy clay (2.5 pt)',r:2.5,u:'pt'}]},
+  {n:'Prometryn / Caparol (Cotton)',c:['cotton'],note:'PRE broadleaf grass control. Avoid coarse sands.',u:'pt',rates:[{l:'Standard (1.5 pt)',r:1.5,u:'pt'},{l:'Full (2 pt)',r:2,u:'pt'}]},
+  {n:'Pyrithiobac / Staple (Cotton)',c:['cotton'],note:'POST broadleaf. Max 5.1 fl oz total/season. Add NIS.',u:'fl oz',rates:[{l:'Standard (1.7 fl oz)',r:1.7,u:'fl oz'},{l:'Full (2.5 fl oz)',r:2.5,u:'fl oz'}]},
+  {n:'Flumioxazin / Valor (Cotton PRE)',c:['cotton'],note:'PRE burndown. Apply 7-30 days before planting.',u:'fl oz',rates:[{l:'Standard (1 fl oz)',r:1,u:'fl oz'},{l:'Full (2 fl oz)',r:2,u:'fl oz'}]},
+  {n:'S-Metolachlor / Dual Magnum (Cotton)',c:['cotton'],note:'PRE grass control. Apply preemergence after planting.',u:'pt',rates:[{l:'Standard (1 pt)',r:1,u:'pt'},{l:'Heavy (1.33 pt)',r:1.33,u:'pt'}]},
+  {n:'Fomesafen / Reflex (Cotton PRE)',c:['cotton'],note:'PRE sandy Coastal Plain soils ONLY. Tank-mix with diuron or Warrant.',u:'fl oz',rates:[{l:'Standard (10 fl oz)',r:10,u:'fl oz'}]},
+  {n:'Acetochlor / Warrant (Cotton)',c:['cotton'],note:'PRE grass. Rainfall needed. Often combined with diuron + fomesafen.',u:'pt',rates:[{l:'Standard (2 pt)',r:2,u:'pt'}]},
+  {n:'Envoke / Trifloxysulfuron (Cotton)',c:['cotton'],note:'ALS POST. Very low use rate. Max 0.285 dry oz/A/season.',u:'dry oz',rates:[{l:'Standard overtop (0.1 dry oz)',r:.1,u:'dry oz'},{l:'Full rate (0.285 dry oz)',r:.285,u:'dry oz'}]},
+  {n:'Suprend (Cotton)',c:['cotton'],note:'Directed spray when cotton is 6+ in tall.',u:'qt',rates:[{l:'Standard directed (1.5 qt)',r:1.5,u:'qt'},{l:'Full (2 qt)',r:2,u:'qt'}]},
+  {n:'Brake / Fluridone (Cotton)',c:['cotton'],note:'PRE grass and broadleaf. Good on sandhill soils. Avoid clay soils.',u:'pt',rates:[{l:'Sandy soils (1 pt)',r:1,u:'pt'},{l:'Standard (1.5 pt)',r:1.5,u:'pt'}]},
 ];
-
-// Build lookup map
-var CHEM_MAP = {};
-for(var _i=0;_i<CHEMS.length;_i++){ CHEM_MAP[CHEMS[_i].name] = CHEMS[_i]; }
-
-function unitOpts(sel) {
-  var h = "";
-  for(var i=0;i<UNITS.length;i++){
-    h += "<option" + (UNITS[i]===sel?" selected":"") + ">" + UNITS[i] + "</option>";
-  }
-  return h;
+ 
+// Build a quick lookup map by name for fast access
+var CHEMICAL_MAP = {};
+CHEMICALS.forEach(function(chem) {
+  CHEMICAL_MAP[chem.n] = chem;
+});
+ 
+// ── Incompatibility Rules ─────────────────────────────────────────────────────
+// Each rule defines two groups of keywords (a and b).
+// If the mix contains chemicals matching both groups, show a warning.
+// severity: 'danger' = do not mix | 'caution' = use care
+ 
+var INCOMPATIBILITIES = [
+  {
+    a: ['liberty', 'glufosinate'],
+    b: ['crop oil', 'coc', 'white water'],
+    severity: 'danger',
+    label: 'Liberty/Glufosinate + COC',
+    tip: 'COC reduces glufosinate efficacy and can cause crop injury. Use AMS only — never add COC or MSO to glufosinate.'
+  },
+  {
+    a: ['paraquat', 'gramoxone'],
+    b: ['_any_other'],  // special flag: warn if more than 1 chemical in tank
+    severity: 'danger',
+    label: 'Paraquat (Gramoxone) tank mix',
+    tip: 'Paraquat is RESTRICTED USE. Most tank mix combinations are prohibited or reduce efficacy. Check label before adding any partner.'
+  },
+  {
+    a: ['clethodim', 'select max'],
+    b: ['2,4-d', 'dicamba', 'banvel', 'engenia', 'enlist'],
+    severity: 'danger',
+    label: 'Clethodim + 2,4-D or Dicamba — Antagonism',
+    tip: '2,4-D and dicamba reduce clethodim grass control by 60-75%. Apply separately, or increase clethodim rate and add COC to partially overcome.'
+  },
+  {
+    a: ['clethodim', 'select max'],
+    b: ['dicamba', 'banvel', 'engenia', 'xtendimax'],
+    severity: 'danger',
+    label: 'Clethodim + Dicamba — Severe Antagonism',
+    tip: 'Dicamba severely antagonizes clethodim. Volunteer corn control drops from 90% to 21% in studies. Use a dual-boom sprayer or apply on separate days.'
+  },
+  {
+    a: ['clethodim', 'select max'],
+    b: ['glyphosate', 'roundup'],
+    severity: 'caution',
+    label: 'Clethodim + Glyphosate — Potential Antagonism',
+    tip: 'Glyphosate can reduce clethodim efficacy, especially at lower rates. Add COC and consider increasing the clethodim rate.'
+  },
+  {
+    a: ['liberty', 'glufosinate'],
+    b: ['glyphosate', 'roundup'],
+    severity: 'caution',
+    label: 'Glufosinate + Glyphosate — Reduced Efficacy',
+    tip: 'Mixing glufosinate and glyphosate can reduce grass control compared to either product applied alone. Apply separately when possible.'
+  },
+  {
+    a: ['enlist', 'enlist one', 'enlist duo'],
+    b: ['dicamba', 'banvel', 'engenia', 'xtendimax'],
+    severity: 'danger',
+    label: 'Enlist + Dicamba — Do Not Mix',
+    tip: 'Enlist (2,4-D choline) and dicamba must NOT be tank mixed. Creates regulatory violations and serious drift risk.'
+  },
+  {
+    a: ['atrazine'],
+    b: ['2,4-d'],
+    severity: 'caution',
+    label: 'Atrazine + 2,4-D — Mixing Order Critical',
+    tip: 'Reversing the mixing order between atrazine and 2,4-D amine can cause a cottage-cheese consistency that plugs sprayers. Always add atrazine before 2,4-D and maintain agitation.'
+  },
+  {
+    a: ['saflufenacil', 'sharpen'],
+    b: ['nis', 'non-ionic'],
+    severity: 'caution',
+    label: 'Sharpen + NIS — Use MSO Instead',
+    tip: 'Sharpen requires MSO (methylated seed oil) at 1% v/v, not NIS. Using NIS significantly reduces Sharpen efficacy.'
+  },
+  {
+    a: ['metolachlor', 'dual magnum'],
+    b: ['crop oil', 'coc'],
+    severity: 'caution',
+    label: 'S-Metolachlor / Dual Magnum + COC',
+    tip: 'The label does not recommend COC with S-metolachlor. Use NIS if an adjuvant is needed.'
+  },
+  {
+    a: ['msma'],
+    b: ['glyphosate', 'roundup', 'liberty', 'glufosinate'],
+    severity: 'caution',
+    label: 'MSMA + Systemic Herbicides',
+    tip: 'MSMA is a directed-spray only product for cotton. Mixing with systemic herbicides applied overtop can cause severe crop injury.'
+  },
+];
+ 
+// Check the current mix for incompatibility issues and return matching warnings
+function checkIncompatibilities(rows) {
+  var chemNames = rows.map(function(r) { return r.name.toLowerCase(); });
+  var warnings = [];
+ 
+  INCOMPATIBILITIES.forEach(function(rule) {
+    // Check if any chemical in the mix matches group A
+    var hasGroupA = rule.a.some(function(keyword) {
+      return chemNames.some(function(name) {
+        // Make sure 'glufosinate' keyword doesn't accidentally match glyphosate products
+        if (keyword === 'glufosinate' && name.indexOf('glyphosate') !== -1) return false;
+        return name.indexOf(keyword) !== -1;
+      });
+    });
+    if (!hasGroupA) return;
+ 
+    // Special case: paraquat warns whenever more than one product is in the mix
+    if (rule.b[0] === '_any_other') {
+      if (chemNames.length > 1) warnings.push(rule);
+      return;
+    }
+ 
+    // Check if any chemical in the mix matches group B
+    var hasGroupB = rule.b.some(function(keyword) {
+      return chemNames.some(function(name) { return name.indexOf(keyword) !== -1; });
+    });
+    if (hasGroupB) warnings.push(rule);
+  });
+ 
+  return warnings;
 }
-
-function chemPickOpts() {
-  var groups = {}, order = [];
-  for(var i=0;i<CHEMS.length;i++){
-    var c = CHEMS[i];
-    if(activeCrop !== "all" && c.crops.indexOf(activeCrop) === -1) continue;
-    var g = (c.crops.indexOf("general") !== -1 || c.crops.length > 2) ? "General/Multi-Crop"
-          : c.crops[0] === "corn" ? "Corn"
-          : c.crops[0] === "soy"  ? "Soybeans" : "Cotton";
-    if(!groups[g]){ groups[g] = []; order.push(g); }
-    groups[g].push(c);
-  }
-  var h = "<option value=''>-- Select chemical --</option>";
-  for(var gi=0;gi<order.length;gi++){
-    var g = order[gi], cs = groups[g];
-    h += "<optgroup label='" + g + "'>";
-    for(var ci=0;ci<cs.length;ci++){
-      h += "<option value='" + cs[ci].name.replace(/'/g,"&#39;") + "'>" + cs[ci].name + "</option>";
-    }
-    h += "</optgroup>";
-  }
-  return h;
+ 
+// Build the warning HTML block shown below results
+function buildWarningHTML(warnings) {
+  if (!warnings.length) return '';
+ 
+  var rows = warnings.map(function(w) {
+    var icon = w.severity === 'danger' ? 'STOP: ' : 'CAUTION: ';
+    return "<div class='warning-row'>" +
+             "<span class='warning-label'>" + icon + w.label + "</span>" +
+             w.tip +
+           "</div>";
+  }).join('');
+ 
+  return "<div class='warning-box'>" +
+           "<div class='warning-title'>⚠️ Tank Mix Warnings (" + warnings.length + ")</div>" +
+           rows +
+           "<div style='font-size:11px;color:#888;margin-top:10px;font-style:italic'>" +
+             "Always read and follow all product labels. When in doubt, conduct a jar test before mixing." +
+           "</div>" +
+         "</div>";
 }
-
-function rateOpts(rates) {
-  var h = "<option value=''>-- Select preset rate --</option>";
-  for(var i=0;i<rates.length;i++){
-    h += "<option value='" + i + "'>" + rates[i].label + "</option>";
-  }
-  h += "<option value='custom'>Custom (type below)</option>";
-  return h;
+ 
+// ── Mixing Order ──────────────────────────────────────────────────────────────
+// Correct ag mixing order: dry products first, water treatments second, everything else third.
+ 
+var WATER_TREATMENT_KEYWORDS = ['ams', 'ammonium sulfate', 'ams hotshot'];
+ 
+function getMixingOrder(row) {
+  if (row.unit === 'lb' || row.unit === 'dry oz') return 0; // Dry products first
+  var nameLower = row.name.toLowerCase();
+  var isWaterTreatment = WATER_TREATMENT_KEYWORDS.some(function(keyword) {
+    return nameLower.indexOf(keyword) !== -1;
+  });
+  return isWaterTreatment ? 1 : 2; // Water treatments second, herbicides third
 }
-
-function setMode(mode) {
-  calcMode = mode;
-  $("tankSection").style.display  = mode === "tank"  ? "" : "none";
-  $("acresSection").style.display = mode === "acres" ? "" : "none";
-  $("modeTank").classList.toggle("active",  mode === "tank");
-  $("modeAcres").classList.toggle("active", mode === "acres");
-  $("calcBtn").textContent = mode === "tank" ? "Calculate Per Tank" : "Calculate Season Total";
-  $("results").style.display = "none";
-  var tb = $("textBtn"); if(tb) tb.style.display = "none";
+ 
+// ── Row Color Category ────────────────────────────────────────────────────────
+function getRowColorClass(row) {
+  if (row.unit === 'lb' || row.unit === 'dry oz') return 'dry';
+  var nameLower = row.name.toLowerCase();
+  var isWaterTreatment = WATER_TREATMENT_KEYWORDS.some(function(keyword) {
+    return nameLower.indexOf(keyword) !== -1;
+  });
+  return isWaterTreatment ? 'water' : 'herb';
 }
-
-function setCrop(crop, el) {
-  activeCrop = crop;
-  var tabs = document.querySelectorAll(".crop-tab");
-  for(var i=0;i<tabs.length;i++) tabs[i].classList.remove("active");
-  el.classList.add("active");
-  var cards = document.querySelectorAll("#chemList .card");
-  for(var i=0;i<cards.length;i++) q(cards[i],".chem-pick").innerHTML = chemPickOpts();
+ 
+// ── Smart Amount Display ──────────────────────────────────────────────────────
+// Automatically picks the most readable unit based on the calculated amount.
+// Liquid: fl oz → pt → qt → gal
+// Dry:    dry oz → lb
+ 
+function formatAmount(amount, outputUnit) {
+  var isDry = (outputUnit === 'lb' || outputUnit === 'dry oz');
+ 
+  if (isDry) {
+    var lbs = convertUnits(amount, outputUnit, 'lb');
+    if (lbs >= 1) return lbs.toFixed(2) + ' lb';
+    return convertUnits(amount, outputUnit, 'dry oz').toFixed(2) + ' dry oz';
+  }
+ 
+  // Liquid path
+  var gals = convertUnits(amount, outputUnit, 'gal');
+  if (gals >= 1) return gals.toFixed(2) + ' gal';
+  var qts = convertUnits(amount, outputUnit, 'qt');
+  if (qts >= 1) return qts.toFixed(2) + ' qt';
+  var pts = convertUnits(amount, outputUnit, 'pt');
+  if (pts >= 1) return pts.toFixed(2) + ' pt';
+  return convertUnits(amount, outputUnit, 'fl oz').toFixed(2) + ' fl oz';
 }
-
-function findCard(el) {
-  var node = el;
-  while(node){
-    if(node.className && node.className.toString().indexOf("chem-card") !== -1) return node;
-    node = node.parentNode;
-  }
-  return null;
+ 
+// ── UI Helpers ────────────────────────────────────────────────────────────────
+ 
+// Shortcut to get a DOM element by ID
+function getEl(id) { return document.getElementById(id); }
+ 
+// Shortcut to querySelector inside an element
+function getChild(parent, selector) { return parent.querySelector(selector); }
+ 
+// Find the parent .chem-card element from any child element
+function findParentChemCard(element) {
+  var node = element;
+  while (node) {
+    if (node.classList && node.classList.contains('chem-card')) return node;
+    node = node.parentNode;
+  }
+  return null;
 }
-
-function addChem(opts) {
-  opts = opts || {};
-  var name    = opts.name    || "";
-  var rate    = opts.rate    || "";
-  var unit    = opts.unit    || "oz";
-  var outUnit = opts.outUnit || "oz";
-  var known   = CHEM_MAP[name];
-  var customVal = (!known && name) ? name : "";
-  var div = document.createElement("div");
-  div.className = "card chem-card";
-  div.innerHTML =
-    "<button class='remove-btn' onclick='this.parentNode.remove()'>&times;</button>" +
-    "<div class='preset-box'>" +
-      "<div class='blabel'>Pick from List</div>" +
-      "<div class='field'><select class='chem-pick' onchange='onChemPick(this)'>" + chemPickOpts() + "</select></div>" +
-      "<div class='note-txt chem-note'></div>" +
-      "<div class='field' style='margin-top:6px'><label>Preset Rate</label>" +
-        "<select class='rate-pick' onchange='onRatePick(this)'><option>-- Pick a chemical first --</option></select>" +
-      "</div>" +
-      "<div class='hint-txt hint-el'></div>" +
-    "</div>" +
-    "<div class='or-div'>-- OR --</div>" +
-    "<div class='custom-box'>" +
-      "<div class='blabel'>Custom Chemical</div>" +
-      "<div class='field'><input class='name' type='text' placeholder='Type any chemical name...' value='" + customVal + "'></div>" +
-    "</div>" +
-    "<div class='row' style='margin-top:10px'>" +
-      "<div class='field'><label>Rate/Acre</label><input class='rate' type='number' inputmode='decimal' step='any' placeholder='Amount' value='" + rate + "'></div>" +
-      "<div class='field'><label>Rate Unit</label><select class='unit'>" + unitOpts(unit) + "</select></div>" +
-      "<div class='field'><label>Output Unit</label><select class='outUnit'>" + unitOpts(outUnit) + "</select></div>" +
-    "</div>";
-  $("chemList").appendChild(div);
-  if(known){
-    q(div,".chem-pick").value = name;
-    applyChemInfo(div, name, false);
-    q(div,".rate").value    = rate;
-    q(div,".unit").value    = unit;
-    q(div,".outUnit").value = outUnit;
-  }
+ 
+// Build the chemical dropdown options, optionally filtered by a search term
+function buildChemOptions(searchFilter) {
+  var filter = searchFilter ? searchFilter.toLowerCase() : '';
+ 
+  // Group chemicals by category
+  var groups = {};
+  var groupOrder = [];
+ 
+  CHEMICALS.forEach(function(chem) {
+    // Skip if wrong crop tab is selected
+    if (currentCrop !== 'all' && chem.c.indexOf(currentCrop) === -1) return;
+    // Skip if doesn't match search
+    if (filter && chem.n.toLowerCase().indexOf(filter) === -1) return;
+ 
+    // Determine group label
+    var isMultiCrop = chem.c.indexOf('general') !== -1 || chem.c.length > 2;
+    var groupLabel = isMultiCrop ? 'General/Multi-Crop'
+                   : chem.c[0] === 'corn'   ? 'Corn'
+                   : chem.c[0] === 'soy'    ? 'Soybeans'
+                   : 'Cotton';
+ 
+    if (!groups[groupLabel]) { groups[groupLabel] = []; groupOrder.push(groupLabel); }
+    groups[groupLabel].push(chem);
+  });
+ 
+  var html = "<option value=''>-- Select chemical --</option>";
+  groupOrder.forEach(function(label) {
+    html += "<optgroup label='" + label + "'>";
+    groups[label].forEach(function(chem) {
+      html += "<option value='" + chem.n.replace(/'/g, "&#39;") + "'>" + chem.n + "</option>";
+    });
+    html += "</optgroup>";
+  });
+  return html;
 }
-
-function onChemPick(sel){ applyChemInfo(findCard(sel), sel.value, true); }
-
-function applyChemInfo(card, name, clearRate) {
-  if(!card) return;
-  var chem = CHEM_MAP[name];
-  q(card,".chem-note").textContent = chem ? chem.note : "";
-  q(card,".rate-pick").innerHTML   = chem ? rateOpts(chem.rates) : "<option>-- Pick a chemical first --</option>";
-  q(card,".hint-el").textContent   = "";
-  if(chem && clearRate){
-    q(card,".rate").value    = "";
-    q(card,".unit").value    = chem.dUnit;
-    q(card,".outUnit").value = chem.dOut;
-  }
+ 
+// Build preset rate dropdown options for a given chemical
+function buildRateOptions(rates) {
+  var options = "<option value=''>-- Select preset rate --</option>";
+  options += rates.map(function(rate, index) {
+    return "<option value='" + index + "'>" + rate.l + "</option>";
+  }).join('');
+  options += "<option value='custom'>Custom (type below)</option>";
+  return options;
 }
-
-function onRatePick(sel) {
-  var card = findCard(sel);
-  if(!card) return;
-  var chem = CHEM_MAP[q(card,".chem-pick").value];
-  var hint = q(card,".hint-el");
-  if(!chem || !sel.value || sel.value === "custom"){
-    hint.textContent = sel.value === "custom" ? "Enter your own rate below" : "";
-    if(sel.value === "custom") q(card,".rate").focus();
-    return;
-  }
-  var preset = chem.rates[parseInt(sel.value,10)];
-  q(card,".rate").value    = preset.rate;
-  q(card,".unit").value    = preset.unit;
-  q(card,".outUnit").value = preset.unit;
-  hint.textContent = "Selected: " + preset.label;
+ 
+// Build a single result row with color coding
+function buildResultRow(name, displayValue, subText, colorClass) {
+  var cls = colorClass ? ' ' + colorClass : '';
+  var sub = subText ? "<span class='result-sub'>" + subText + "</span>" : '';
+  return "<div class='result-row" + cls + "'>" +
+           "<span class='result-name'>" + name + "</span>" +
+           "<span class='result-value'>" + displayValue + sub + "</span>" +
+         "</div>";
 }
-
-function getRows() {
-  var items = [], cards = document.querySelectorAll("#chemList .card");
-  for(var i=0;i<cards.length;i++){
-    var row    = cards[i];
-    var nameEl = q(row,".name"), pickEl = q(row,".chem-pick");
-    var rateEl = q(row,".rate"), unitEl = q(row,".unit"), outEl = q(row,".outUnit");
-    var name   = (nameEl && nameEl.value.trim()) || (pickEl && pickEl.value) || "";
-    var rate   = rateEl ? parseFloat(rateEl.value) : 0;
-    var unit   = unitEl ? unitEl.value : "oz";
-    var out    = outEl  ? outEl.value  : "oz";
-    if(rate && name) items.push({name:name, rate:rate, unit:unit, out:out});
-  }
-  return items;
+ 
+// Show the results section and scroll to it
+function displayResults(html) {
+  var el = getEl('results');
+  el.innerHTML = html;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  getEl('txtBtn').style.display = 'block';
 }
-
-function calculate(){ calcMode === "tank" ? calcTank() : calcSeason(); }
-
-function calcTank() {
-  var tank = parseFloat($("tank").value), gpa = parseFloat($("gpa").value);
-  if(!tank || !gpa){ alert("Enter tank size and GPA first."); return; }
-  var acres = tank / gpa;
-  var rows = getRows(), html = "";
-  for(var i=0;i<rows.length;i++){
-    var r = rows[i];
-    html += "<div class='result-row'><span class='result-name'>" + r.name + "</span>" +
-            "<span class='result-val'>" + cvt(r.rate*acres,r.unit,r.out).toFixed(2) + " " + r.out + "</span></div>";
-  }
-  if(!html) html = "<div class='result-row'><span class='result-name' style='color:#888'>No chemicals entered.</span></div>";
-  var el = $("results");
-  el.innerHTML = "<div class='results-card'><div class='results-title'>&#127806; " + acres.toFixed(2) + " acres per tank</div>" + html + "</div>";
-  el.style.display = "block";
-  el.scrollIntoView({behavior:"smooth", block:"nearest"});
-  var tb = $("textBtn"); if(tb) tb.style.display = "block";
+ 
+// ── Mode & Crop Controls ──────────────────────────────────────────────────────
+ 
+function setMode(newMode) {
+  currentMode = newMode;
+ 
+  // Show/hide the correct input card
+  getEl('tankInputs').style.display   = newMode === 'tank'   ? '' : 'none';
+  getEl('acreInputs').style.display   = newMode === 'acre'   ? '' : 'none';
+  getEl('seasonInputs').style.display = newMode === 'season' ? '' : 'none';
+ 
+  // Update toggle button active state
+  ['mTank', 'mAcre', 'mSeason'].forEach(function(id, i) {
+    var modes = ['tank', 'acre', 'season'];
+    getEl(id).classList.toggle('active', modes[i] === newMode);
+  });
+ 
+  // Update calculate button label
+  var labels = { tank: 'Per Tank', acre: 'Per Acre', season: 'Season Total' };
+  getEl('calcBtn').textContent = 'Calculate ' + labels[newMode];
+ 
+  // Clear results
+  getEl('results').style.display = 'none';
+  getEl('txtBtn').style.display = 'none';
 }
-
-function calcSeason() {
-  var acres = parseFloat($("totalAcres").value), apps = parseFloat($("numApps").value) || 1;
-  if(!acres){ alert("Enter total acres first."); return; }
-  var rows = getRows();
-  if(!rows.length){ alert("Add at least one chemical with a rate."); return; }
-  var html = "";
-  for(var i=0;i<rows.length;i++){
-    var r      = rows[i];
-    var perApp = cvt(r.rate * acres, r.unit, r.out);
-    var season = perApp * apps;
-    var bulk   = "";
-    if(r.out==="oz"||r.out==="pt"||r.out==="qt"||r.out==="gal"){
-      var gals = cvt(season, r.out, "gal");
-      if(gals >= 1) bulk = "<br>= " + gals.toFixed(2) + " gal total";
-    }
-    var appsLabel = apps > 1 ? " x " + apps + " apps" : "";
-    html += "<div class='result-row-wide'>" +
-      "<span class='result-name-wide'>" + r.name + "</span>" +
-      "<span class='result-vals'>" +
-        "<span class='result-val-main'>" + season.toFixed(2) + " " + r.out + "</span>" +
-        "<span class='result-val-sub'>" + perApp.toFixed(2) + " " + r.out + "/app" + appsLabel + bulk + "</span>" +
-      "</span></div>";
-  }
-  var el = $("results");
-  el.innerHTML = "<div class='season-card'><div class='season-title'>&#128197; Season Total</div>" +
-    "<div class='season-sub'>" + acres.toLocaleString() + " acres x " + apps + " application" + (apps>1?"s":"") + "</div>" +
-    html + "</div>";
-  el.style.display = "block";
-  el.scrollIntoView({behavior:"smooth", block:"nearest"});
-  var tb = $("textBtn"); if(tb) tb.style.display = "block";
+ 
+function setCrop(newCrop, clickedTab) {
+  currentCrop = newCrop;
+ 
+  // Update tab active state
+  document.querySelectorAll('.crop-tab').forEach(function(tab) {
+    tab.classList.remove('active');
+  });
+  clickedTab.classList.add('active');
+ 
+  // Refresh all chemical dropdowns to reflect new crop filter
+  document.querySelectorAll('.chem-pick').forEach(function(select) {
+    select.innerHTML = buildChemOptions();
+  });
 }
-
-function getMix() {
-  var chems = [], cards = document.querySelectorAll("#chemList .card");
-  for(var i=0;i<cards.length;i++){
-    var r = cards[i];
-    chems.push({
-      name:    (q(r,".name") ? q(r,".name").value.trim() : "") || (q(r,".chem-pick") ? q(r,".chem-pick").value : ""),
-      rate:    q(r,".rate")    ? q(r,".rate").value    : "",
-      unit:    q(r,".unit")    ? q(r,".unit").value    : "oz",
-      outUnit: q(r,".outUnit") ? q(r,".outUnit").value : "oz"
-    });
-  }
-  return { tank:$("tank").value, gpa:$("gpa").value, chems:chems };
+ 
+// ── Chemical Card ─────────────────────────────────────────────────────────────
+ 
+function addChemCard(opts) {
+  opts = opts || {};
+  var name    = opts.name    || '';
+  var rate    = opts.rate    || '';
+  var unit    = opts.unit    || 'fl oz';
+  var outUnit = opts.outUnit || 'fl oz';
+ 
+  var knownChem  = CHEMICAL_MAP[name];
+  var customName = (!knownChem && name) ? name : '';
+ 
+  var card = document.createElement('div');
+  card.className = 'card chem-card';
+ 
+  card.innerHTML =
+    "<button class='remove-btn' onclick='this.parentNode.remove()'>×</button>" +
+ 
+    // Collapsed summary (shown when card is collapsed)
+    "<div class='chem-summary' onclick='expandChemCard(this)'>" +
+      "<span class='chem-summary-text'>Not set</span>" +
+      "<span class='expand-hint'>tap to edit</span>" +
+    "</div>" +
+ 
+    // Pick from list section
+    "<div class='pick-section'>" +
+      "<div class='pick-label'>Pick from List</div>" +
+      "<div class='search-wrap'>" +
+        "<span class='search-icon'>🔍</span>" +
+        "<input type='text' placeholder='Search chemicals...' oninput='onChemSearch(this)' autocomplete='off'>" +
+      "</div>" +
+      "<div class='field'>" +
+        "<select class='chem-pick' onchange='onChemPick(this)'>" + buildChemOptions() + "</select>" +
+      "</div>" +
+      "<div class='chem-note'></div>" +
+      "<div class='field' style='margin-top:6px'>" +
+        "<label>Preset Rate</label>" +
+        "<select class='rate-pick' onchange='onRatePick(this)'><option>-- Pick a chemical first --</option></select>" +
+      "</div>" +
+      "<div class='rate-hint'></div>" +
+    "</div>" +
+ 
+    "<div class='or-divider'>-- OR --</div>" +
+ 
+    // Custom chemical section
+    "<div class='custom-section'>" +
+      "<div class='custom-label'>Custom Chemical</div>" +
+      "<div class='field'>" +
+        "<input class='name-input' type='text' placeholder='Type any chemical name...' value='" + customName + "' oninput='onChemNameInput(this)'>" +
+      "</div>" +
+    "</div>" +
+ 
+    // Rate and unit inputs
+    "<div class='rate-inputs input-row' style='margin-top:10px'>" +
+      "<div class='field'>" +
+        "<label>Rate/Acre</label>" +
+        "<input class='rate-input' type='number' inputmode='decimal' step='any' placeholder='Amount' value='" + rate + "' oninput='onRateInput(this)'>" +
+      "</div>" +
+      "<div class='field'>" +
+        "<label>Rate Unit</label>" +
+        "<select class='unit-select' onchange='onRateInput(this)'>" + buildUnitOptions(unit) + "</select>" +
+      "</div>" +
+      "<div class='field'>" +
+        "<label>Output Unit</label>" +
+        "<select class='out-select'>" + buildUnitOptions(outUnit) + "</select>" +
+      "</div>" +
+    "</div>";
+ 
+  getEl('chemList').appendChild(card);
+ 
+  // If loading a known chemical, pre-populate the fields
+  if (knownChem) {
+    getChild(card, '.chem-pick').value = name;
+    applyChemInfo(card, name, false);
+    getChild(card, '.rate-input').value = rate;
+    getChild(card, '.unit-select').value = unit;
+    getChild(card, '.out-select').value = outUnit;
+  }
 }
-
+ 
+// Apply chemical info (note, preset rates) to a card when a chemical is selected
+function applyChemInfo(card, chemName, clearRate) {
+  if (!card) return;
+  var chem = CHEMICAL_MAP[chemName];
+ 
+  getChild(card, '.chem-note').textContent = chem ? chem.note : '';
+  getChild(card, '.rate-pick').innerHTML = chem
+    ? buildRateOptions(chem.rates)
+    : "<option>-- Pick a chemical first --</option>";
+  getChild(card, '.rate-hint').textContent = '';
+ 
+  if (chem && clearRate) {
+    getChild(card, '.rate-input').value = '';
+    getChild(card, '.unit-select').value = chem.u;
+    getChild(card, '.out-select').value  = chem.u;
+  }
+}
+ 
+// Update the collapsed summary line and auto-collapse when name + rate are filled
+function updateCollapsedSummary(element) {
+  var card = findParentChemCard(element);
+  if (!card) return;
+ 
+  var pickValue   = getChild(card, '.chem-pick') ? getChild(card, '.chem-pick').value : '';
+  var customValue = getChild(card, '.name-input') ? getChild(card, '.name-input').value.trim() : '';
+  var name = pickValue || customValue;
+  var rate = getChild(card, '.rate-input') ? getChild(card, '.rate-input').value : '';
+  var unit = getChild(card, '.unit-select') ? getChild(card, '.unit-select').value : '';
+ 
+  var summaryText = (name && rate) ? name + ' — ' + rate + ' ' + unit : (name || 'Not set');
+  var summaryEl = getChild(card, '.chem-summary-text');
+  if (summaryEl) summaryEl.textContent = summaryText;
+ 
+  // Auto-collapse when both name and rate are filled
+  if (name && rate) card.classList.add('collapsed');
+}
+ 
+function expandChemCard(summaryEl) {
+  var card = findParentChemCard(summaryEl);
+  if (card) card.classList.remove('collapsed');
+}
+ 
+// ── Chemical Card Event Handlers ──────────────────────────────────────────────
+ 
+function onChemSearch(input) {
+  var card = findParentChemCard(input);
+  if (!card) return;
+  getChild(card, '.chem-pick').innerHTML = buildChemOptions(input.value);
+}
+ 
+function onChemPick(select) {
+  applyChemInfo(findParentChemCard(select), select.value, true);
+}
+ 
+function onRatePick(select) {
+  var card = findParentChemCard(select);
+  if (!card) return;
+ 
+  var chem = CHEMICAL_MAP[getChild(card, '.chem-pick').value];
+  var hintEl = getChild(card, '.rate-hint');
+ 
+  if (!chem || !select.value || select.value === 'custom') {
+    hintEl.textContent = select.value === 'custom' ? 'Enter your own rate below' : '';
+    return;
+  }
+ 
+  var preset = chem.rates[parseInt(select.value, 10)];
+  getChild(card, '.rate-input').value = preset.r;
+  getChild(card, '.unit-select').value = preset.u;
+  getChild(card, '.out-select').value  = preset.u;
+  hintEl.textContent = 'Selected: ' + preset.l;
+ 
+  updateCollapsedSummary(select);
+}
+ 
+function onRateInput(element) {
+  updateCollapsedSummary(element);
+}
+ 
+function onChemNameInput(element) {
+  updateCollapsedSummary(element);
+}
+ 
+// ── Get Rows ──────────────────────────────────────────────────────────────────
+// Reads all chemical cards and returns an array of row objects, sorted by mixing order.
+ 
+function getChemRows() {
+  var rows = [];
+ 
+  document.querySelectorAll('#chemList .chem-card').forEach(function(card) {
+    var pickVal   = getChild(card, '.chem-pick')   ? getChild(card, '.chem-pick').value : '';
+    var nameVal   = getChild(card, '.name-input')  ? getChild(card, '.name-input').value.trim() : '';
+    var name = pickVal || nameVal;
+    var rate = parseFloat(getChild(card, '.rate-input').value);
+    var unit = getChild(card, '.unit-select').value;
+    var out  = getChild(card, '.out-select').value;
+ 
+    if (name && rate) {
+      rows.push({ name: name, rate: rate, unit: unit, out: out });
+    }
+  });
+ 
+  // Sort into correct mixing order: dry → water treatments → herbicides
+  return rows.sort(function(a, b) {
+    return getMixingOrder(a) - getMixingOrder(b);
+  });
+}
+ 
+// ── Calculate ─────────────────────────────────────────────────────────────────
+ 
+function calculate() {
+  if (currentMode === 'tank')   calculatePerTank();
+  if (currentMode === 'acre')   calculatePerAcre();
+  if (currentMode === 'season') calculateSeason();
+}
+ 
+function calculatePerTank() {
+  var tankSize = parseFloat(getEl('tank').value);
+  var gpa      = parseFloat(getEl('gpa').value);
+  if (!tankSize || !gpa) { alert('Enter tank size and GPA first.'); return; }
+ 
+  var acresPerTank = tankSize / gpa;
+  var rows = getChemRows();
+  var resultRows = '';
+  var totalChemGallons = 0;
+ 
+  rows.forEach(function(row) {
+    var amount = convertUnits(row.rate * acresPerTank, row.unit, row.out);
+    resultRows += buildResultRow(row.name, formatAmount(amount, row.out), '', getRowColorClass(row));
+    if (LIQUID_UNITS.indexOf(row.out) !== -1) {
+      totalChemGallons += convertUnits(amount, row.out, 'gal');
+    }
+  });
+ 
+  if (!resultRows) {
+    resultRows = "<div class='result-row'><span class='result-name' style='color:#888'>No chemicals entered.</span></div>";
+  }
+ 
+  var waterNeeded = Math.max(0, tankSize - totalChemGallons);
+  var waterRow = rows.length
+    ? "<div class='water-to-fill'><span class='result-name'>💧 Water to fill</span><span class='result-value'>" + waterNeeded.toFixed(1) + " gal</span></div>"
+    : '';
+ 
+  displayResults(
+    "<div class='results-card'>" +
+      "<div class='results-title'>🌾 " + acresPerTank.toFixed(2) + " acres per tank</div>" +
+      resultRows + waterRow +
+    "</div>" +
+    buildWarningHTML(checkIncompatibilities(rows))
+  );
+}
+ 
+function calculatePerAcre() {
+  var acres    = parseFloat(getEl('sprayAcres').value);
+  var gpa      = parseFloat(getEl('acreGpa').value);
+  if (!acres) { alert('Enter acres to spray first.'); return; }
+ 
+  var rows = getChemRows();
+  if (!rows.length) { alert('Add at least one chemical.'); return; }
+ 
+  var totalGallons = gpa ? acres * gpa : null;
+  var resultRows = '';
+  var totalChemGallons = 0;
+ 
+  rows.forEach(function(row) {
+    var amount = convertUnits(row.rate * acres, row.unit, row.out);
+    var sub = totalGallons ? 'for ' + totalGallons.toFixed(0) + ' gal load' : '';
+    resultRows += buildResultRow(row.name, formatAmount(amount, row.out), sub, getRowColorClass(row));
+    if (LIQUID_UNITS.indexOf(row.out) !== -1) {
+      totalChemGallons += convertUnits(amount, row.out, 'gal');
+    }
+  });
+ 
+  var waterRow = totalGallons
+    ? "<div class='water-to-fill'><span class='result-name'>💧 Water to fill</span><span class='result-value'>" + Math.max(0, totalGallons - totalChemGallons).toFixed(1) + " gal</span></div>"
+    : '';
+ 
+  var title = '💧 ' + acres + ' acre load' + (totalGallons ? ' (' + totalGallons.toFixed(0) + ' gal total)' : '');
+ 
+  displayResults(
+    "<div class='results-card'>" +
+      "<div class='results-title'>" + title + "</div>" +
+      resultRows + waterRow +
+    "</div>" +
+    buildWarningHTML(checkIncompatibilities(rows))
+  );
+}
+ 
+function calculateSeason() {
+  var acres = parseFloat(getEl('acres').value);
+  var apps  = parseFloat(getEl('apps').value) || 1;
+  if (!acres) { alert('Enter total acres first.'); return; }
+ 
+  var rows = getChemRows();
+  if (!rows.length) { alert('Add at least one chemical.'); return; }
+ 
+  var resultRows = '';
+ 
+  rows.forEach(function(row) {
+    var perApp  = convertUnits(row.rate * acres, row.unit, row.out);
+    var total   = perApp * apps;
+    var gals    = LIQUID_UNITS.indexOf(row.out) !== -1 ? convertUnits(total, row.out, 'gal') : 0;
+    var sub     = formatAmount(perApp, row.out) + '/app' +
+                  (apps > 1 ? ' x ' + apps + ' apps' : '') +
+                  (gals >= 1 ? ' = ' + gals.toFixed(2) + ' gal total' : '');
+    resultRows += buildResultRow(row.name, formatAmount(total, row.out), sub, getRowColorClass(row));
+  });
+ 
+  displayResults(
+    "<div class='results-card'>" +
+      "<div class='results-title'>📅 Season Total — " + acres.toLocaleString() + " acres x " + apps + " app" + (apps > 1 ? 's' : '') + "</div>" +
+      resultRows +
+    "</div>" +
+    buildWarningHTML(checkIncompatibilities(rows))
+  );
+}
+ 
+// ── Save / Load / Delete Mixes ────────────────────────────────────────────────
+ 
+function getCurrentMixData() {
+  var chems = [];
+  document.querySelectorAll('#chemList .chem-card').forEach(function(card) {
+    var pickVal = getChild(card, '.chem-pick') ? getChild(card, '.chem-pick').value : '';
+    var nameVal = getChild(card, '.name-input') ? getChild(card, '.name-input').value.trim() : '';
+    chems.push({
+      name:    pickVal || nameVal,
+      rate:    getChild(card, '.rate-input')  ? getChild(card, '.rate-input').value  : '',
+      unit:    getChild(card, '.unit-select') ? getChild(card, '.unit-select').value : 'fl oz',
+      outUnit: getChild(card, '.out-select')  ? getChild(card, '.out-select').value  : 'fl oz'
+    });
+  });
+  return {
+    tank:  getEl('tank').value,
+    gpa:   getEl('gpa').value,
+    chems: chems
+  };
+}
+ 
 function saveMix() {
-  var el = $("mixName");
-  if(!el) return;
-  var name = el.value.trim();
-  if(!name){ el.placeholder = "Enter a name first!"; el.focus(); return; }
-  localStorage.setItem("mix_"+name, JSON.stringify(getMix()));
-  el.value = "";
-  el.placeholder = "Mix name...";
-  refreshList();
+  var nameInput = getEl('mixName');
+  var mixName   = nameInput.value.trim();
+  if (!mixName) { nameInput.placeholder = 'Enter a name first!'; nameInput.focus(); return; }
+ 
+  localStorage.setItem('mix_' + mixName, JSON.stringify(getCurrentMixData()));
+  nameInput.value = '';
+  nameInput.placeholder = 'Mix name...';
+  refreshSavedList();
 }
-
+ 
 function loadMix() {
-  var key = $("savedList").value;
-  if(!key) return;
-  var raw = localStorage.getItem(key);
-  if(!raw) return;
-  var mix = JSON.parse(raw);
-  if(!mix) return;
-  $("tank").value = mix.tank || "";
-  $("gpa").value  = mix.gpa  || "";
-  $("chemList").innerHTML = "";
-  if(mix.chems){ for(var i=0;i<mix.chems.length;i++) addChem(mix.chems[i]); }
-  $("results").style.display = "none";
+  var selectedKey = getEl('savedList').value;
+  if (!selectedKey) return;
+ 
+  var mixData = JSON.parse(localStorage.getItem(selectedKey) || 'null');
+  if (!mixData) return;
+ 
+  getEl('tank').value = mixData.tank || '';
+  getEl('gpa').value  = mixData.gpa  || '';
+  getEl('chemList').innerHTML = '';
+ 
+  (mixData.chems || []).forEach(function(chem) {
+    addChemCard(chem);
+    // Auto-collapse cards that have name and rate already filled
+    var cards = document.querySelectorAll('#chemList .chem-card');
+    var lastCard = cards[cards.length - 1];
+    if (chem.name && chem.rate) updateCollapsedSummary(getChild(lastCard, '.rate-input'));
+  });
+ 
+  getEl('results').style.display = 'none';
 }
-
+ 
 function deleteMix() {
-  var key = $("savedList").value;
-  if(!key) return;
-  if(!confirm("Delete " + key.replace("mix_","") + "?")) return;
-  localStorage.removeItem(key);
-  refreshList();
+  var selectedKey = getEl('savedList').value;
+  if (!selectedKey) return;
+  var mixName = selectedKey.replace('mix_', '');
+  if (!confirm('Delete "' + mixName + '"?')) return;
+  localStorage.removeItem(selectedKey);
+  refreshSavedList();
 }
-
-function refreshList() {
-  var keys = [], k;
-  for(var i=0;i<localStorage.length;i++){
-    k = localStorage.key(i);
-    if(k && k.indexOf("mix_") === 0) keys.push(k);
-  }
-  var sl = $("savedList");
-  if(!sl) return;
-  if(keys.length){
-    sl.innerHTML = "";
-    for(var j=0;j<keys.length;j++){
-      var opt = document.createElement("option");
-      opt.value = keys[j];
-      opt.text  = keys[j].replace("mix_","");
-      sl.appendChild(opt);
-    }
-  } else {
-    sl.innerHTML = "<option value=''>No saved mixes</option>";
-  }
+ 
+function refreshSavedList() {
+  var mixKeys = [];
+  for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    if (key && key.indexOf('mix_') === 0) mixKeys.push(key);
+  }
+ 
+  var selectEl = getEl('savedList');
+  if (mixKeys.length) {
+    selectEl.innerHTML = mixKeys.map(function(key) {
+      return "<option value='" + key + "'>" + key.replace('mix_', '') + "</option>";
+    }).join('');
+  } else {
+    selectEl.innerHTML = "<option value=''>No saved mixes</option>";
+  }
 }
-
-function toggleDark() {
-  if(document.body) document.body.classList.toggle("dark");
+ 
+// ── Start New Mix ─────────────────────────────────────────────────────────────
+ 
+function startNewMix() {
+  if (!confirm('Clear everything and start a new mix?')) return;
+  getEl('chemList').innerHTML = '';
+  getEl('results').style.display = 'none';
+  getEl('txtBtn').style.display = 'none';
+  getEl('mixName').value = '';
+  addChemCard();
 }
-
+ 
+// ── Remember Tank Size & GPA ──────────────────────────────────────────────────
+ 
+function savePrefs() {
+  localStorage.setItem('pref_tank', getEl('tank').value);
+  localStorage.setItem('pref_gpa',  getEl('gpa').value);
+}
+ 
+function loadPrefs() {
+  var savedTank = localStorage.getItem('pref_tank');
+  var savedGpa  = localStorage.getItem('pref_gpa');
+  if (savedTank) getEl('tank').value = savedTank;
+  if (savedGpa)  getEl('gpa').value  = savedGpa;
+}
+ 
+// ── Text Results via SMS ──────────────────────────────────────────────────────
+ 
 function textResults() {
-  var rows = getRows();
-  if(!rows.length){ alert("Calculate first, then text the results."); return; }
-
-  var msg = "Spray Mix Pro Results\n";
-  msg += "====================\n";
-
-  if(calcMode === "tank"){
-    var tank = parseFloat($("tank").value), gpa = parseFloat($("gpa").value);
-    if(tank && gpa){
-      var acres = tank / gpa;
-      msg += "Per Tank (" + tank + " gal, " + gpa + " GPA)\n";
-      msg += acres.toFixed(2) + " acres per tank\n";
-      msg += "--------------------\n";
-      for(var i=0;i<rows.length;i++){
-        var r = rows[i];
-        msg += r.name + ": " + cvt(r.rate*acres,r.unit,r.out).toFixed(2) + " " + r.out + "\n";
-      }
-    }
-  } else {
-    var acres2 = parseFloat($("totalAcres").value), apps2 = parseFloat($("numApps").value) || 1;
-    if(acres2){
-      msg += "Season Total\n";
-      msg += acres2.toLocaleString() + " acres x " + apps2 + " application" + (apps2>1?"s":"") + "\n";
-      msg += "--------------------\n";
-      for(var i=0;i<rows.length;i++){
-        var r = rows[i];
-        var perApp = cvt(r.rate * acres2, r.unit, r.out);
-        var season = perApp * apps2;
-        msg += r.name + ": " + season.toFixed(2) + " " + r.out;
-        msg += " (" + perApp.toFixed(2) + " " + r.out + "/app)\n";
-        if(r.out==="oz"||r.out==="pt"||r.out==="qt"||r.out==="gal"){
-          var gals = cvt(season, r.out, "gal");
-          if(gals >= 1) msg += "  = " + gals.toFixed(2) + " gal total\n";
-        }
-      }
-    }
-  }
-  msg += "====================\n";
-  msg += "Spray Mix Pro App";
-
-  // Open native SMS with pre-filled message
-  window.location.href = "sms:?body=" + encodeURIComponent(msg);
+  var rows = getChemRows();
+  if (!rows.length) { alert('Calculate first.'); return; }
+ 
+  var msg = 'Spray Mix Pro Results\n====================\n';
+ 
+  if (currentMode === 'tank') {
+    var tankSize = parseFloat(getEl('tank').value);
+    var gpa      = parseFloat(getEl('gpa').value);
+    if (tankSize && gpa) {
+      var acres = tankSize / gpa;
+      msg += 'Per Tank (' + tankSize + ' gal, ' + gpa + ' GPA)\n';
+      msg += acres.toFixed(2) + ' acres per tank\n--------------------\n';
+      rows.forEach(function(r) {
+        msg += r.name + ': ' + formatAmount(convertUnits(r.rate * acres, r.unit, r.out), r.out) + '\n';
+      });
+    }
+  } else if (currentMode === 'acre') {
+    var acres = parseFloat(getEl('sprayAcres').value);
+    var gpa   = parseFloat(getEl('acreGpa').value);
+    if (acres) {
+      var totalGal = gpa ? acres * gpa : 0;
+      msg += 'Per Acre Load\n' + acres + ' acres' + (totalGal ? ' (' + totalGal.toFixed(0) + ' gal needed)' : '') + '\n--------------------\n';
+      rows.forEach(function(r) {
+        msg += r.name + ': ' + formatAmount(convertUnits(r.rate * acres, r.unit, r.out), r.out) + '\n';
+      });
+    }
+  } else {
+    var acres = parseFloat(getEl('acres').value);
+    var apps  = parseFloat(getEl('apps').value) || 1;
+    if (acres) {
+      msg += 'Season Total\n' + acres.toLocaleString() + ' acres x ' + apps + ' application' + (apps > 1 ? 's' : '') + '\n--------------------\n';
+      rows.forEach(function(r) {
+        var perApp = convertUnits(r.rate * acres, r.unit, r.out);
+        var total  = perApp * apps;
+        msg += r.name + ': ' + formatAmount(total, r.out) + ' (' + formatAmount(perApp, r.out) + '/app)\n';
+        if (LIQUID_UNITS.indexOf(r.out) !== -1) {
+          var gals = convertUnits(total, r.out, 'gal');
+          if (gals >= 1) msg += '  = ' + gals.toFixed(2) + ' gal total\n';
+        }
+      });
+    }
+  }
+ 
+  msg += '====================\nSpray Mix Pro App';
+  window.location.href = 'sms:?body=' + encodeURIComponent(msg);
 }
-
-addChem();
-refreshList();
-
+ 
+// ── App Init ──────────────────────────────────────────────────────────────────
+ 
+addChemCard();
+refreshSavedList();
+loadPrefs();
+ 
 </script>
+</body>
+</html>
